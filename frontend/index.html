@@ -1,1033 +1,2142 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NexBank — Banking System</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-    :root {
-      --navy:      #0b1f3a;
-      --navy2:     #112b50;
-      --navy3:     #1a3c6e;
-      --blue:      #2563eb;
-      --blue-lt:   #3b82f6;
-      --green:     #059669;
-      --green-lt:  #10b981;
-      --red:       #dc2626;
-      --amber:     #d97706;
-      --bg:        #f1f5fb;
-      --surface:   #ffffff;
-      --surface2:  #f8fafc;
-      --border:    #e2e8f0;
-      --text:      #0f172a;
-      --text2:     #475569;
-      --text3:     #94a3b8;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
-      --shadow:    0 4px 20px rgba(11,31,58,.10);
-      --shadow-lg: 0 12px 40px rgba(11,31,58,.16);
-      --r:         14px;
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sinova Bank — Banking System</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+    :root {
+      --navy: #0b1f3a;
+      --navy2: #112b50;
+      --navy3: #1a3c6e;
+      --blue: #2563eb;
+      --blue-lt: #3b82f6;
+      --green: #059669;
+      --green-lt: #10b981;
+      --red: #dc2626;
+      --amber: #d97706;
+      --bg: #f1f5fb;
+      --surface: #ffffff;
+      --surface2: #f8fafc;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --text2: #475569;
+      --text3: #94a3b8;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, .08);
+      --shadow: 0 4px 20px rgba(11, 31, 58, .10);
+      --shadow-lg: 0 12px 40px rgba(11, 31, 58, .16);
+      --r: 14px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
 
     /* ─── SCROLLBAR ─── */
-    ::-webkit-scrollbar { width:6px; }
-    ::-webkit-scrollbar-track { background:transparent; }
-    ::-webkit-scrollbar-thumb { background:var(--border); border-radius:99px; }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 99px;
+    }
 
     /* ═══════════════════════════════════
        AUTH
     ═══════════════════════════════════ */
     #authPage {
-      min-height:100vh; display:flex; align-items:center; justify-content:center;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: linear-gradient(135deg, #0b1f3a 0%, #1a3c6e 60%, #1e4d8c 100%);
-      position:relative; overflow:hidden; padding:24px;
+      position: relative;
+      overflow: hidden;
+      padding: 24px;
     }
-    #authPage::before {
-      content:''; position:absolute; inset:0;
-      background: radial-gradient(ellipse 80% 60% at 70% 30%, rgba(37,99,235,.18) 0%, transparent 70%),
-                  radial-gradient(ellipse 50% 40% at 20% 80%, rgba(5,150,105,.12) 0%, transparent 60%);
-    }
-    .auth-wrap { position:relative; z-index:1; width:100%; max-width:420px; }
 
-    .auth-brand { text-align:center; margin-bottom:28px; }
-    .auth-brand .brand-mark {
-      width:52px; height:52px; background:var(--green); border-radius:14px;
-      display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px;
+    #authPage::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 70% 30%, rgba(37, 99, 235, .18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(5, 150, 105, .12) 0%, transparent 60%);
     }
-    .auth-brand .brand-mark svg { width:28px; height:28px; fill:#fff; }
-    .auth-brand h1 { font-family:'Playfair Display',serif; color:#fff; font-size:26px; letter-spacing:-.3px; }
-    .auth-brand p  { color:rgba(255,255,255,.5); font-size:13px; margin-top:3px; }
+
+    .auth-wrap {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .auth-brand {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .auth-brand .brand-mark {
+      width: 52px;
+      height: 52px;
+      background: var(--green);
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .auth-brand .brand-mark svg {
+      width: 28px;
+      height: 28px;
+      fill: #fff;
+    }
+
+    .auth-brand h1 {
+      font-family: 'Playfair Display', serif;
+      color: #fff;
+      font-size: 26px;
+      letter-spacing: -.3px;
+    }
+
+    .auth-brand p {
+      color: rgba(255, 255, 255, .5);
+      font-size: 13px;
+      margin-top: 3px;
+    }
 
     .auth-card {
-      background:rgba(255,255,255,.97); border-radius:20px; padding:32px 28px;
-      box-shadow:0 24px 64px rgba(0,0,0,.28);
+      background: rgba(255, 255, 255, .97);
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, .28);
     }
-    .auth-card h2 { font-size:20px; font-weight:700; color:var(--text); }
-    .auth-card .sub { font-size:13px; color:var(--text2); margin-top:3px; margin-bottom:24px; }
 
-    .fg { margin-bottom:16px; }
-    .fg label { display:block; font-size:12px; font-weight:600; color:var(--text2); text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; }
-    .inp-wrap { position:relative; }
-    .inp-wrap .ico { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text3); width:16px; height:16px; }
-    .inp-wrap input {
-      width:100%; padding:11px 12px 11px 36px; border:1.5px solid var(--border);
-      border-radius:10px; font-size:14px; font-family:inherit; background:var(--surface2);
-      color:var(--text); outline:none; transition:border .18s,box-shadow .18s;
+    .auth-card h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
     }
-    .inp-wrap input:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(37,99,235,.12); background:#fff; }
+
+    .auth-card .sub {
+      font-size: 13px;
+      color: var(--text2);
+      margin-top: 3px;
+      margin-bottom: 24px;
+    }
+
+    .fg {
+      margin-bottom: 16px;
+    }
+
+    .fg label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 6px;
+    }
+
+    .inp-wrap {
+      position: relative;
+    }
+
+    .inp-wrap .ico {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text3);
+      width: 16px;
+      height: 16px;
+    }
+
+    .inp-wrap input {
+      width: 100%;
+      padding: 11px 12px 11px 36px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      background: var(--surface2);
+      color: var(--text);
+      outline: none;
+      transition: border .18s, box-shadow .18s;
+    }
+
+    .inp-wrap input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+      background: #fff;
+    }
 
     .btn-main {
-      width:100%; padding:12px; background:var(--navy); color:#fff; border:none;
-      border-radius:10px; font-size:15px; font-weight:600; font-family:inherit;
-      cursor:pointer; transition:background .18s,transform .1s; margin-top:4px;
+      width: 100%;
+      padding: 12px;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background .18s, transform .1s;
+      margin-top: 4px;
     }
-    .btn-main:hover  { background:var(--navy3); }
-    .btn-main:active { transform:scale(.985); }
-    .btn-main:disabled { opacity:.6; cursor:not-allowed; }
 
-    .auth-foot { text-align:center; margin-top:18px; font-size:13px; color:var(--text2); }
-    .auth-foot a { color:var(--blue); font-weight:600; cursor:pointer; text-decoration:none; }
-    .auth-foot a:hover { text-decoration:underline; }
+    .btn-main:hover {
+      background: var(--navy3);
+    }
+
+    .btn-main:active {
+      transform: scale(.985);
+    }
+
+    .btn-main:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .auth-foot {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--text2);
+    }
+
+    .auth-foot a {
+      color: var(--blue);
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .auth-foot a:hover {
+      text-decoration: underline;
+    }
 
     .alert {
-      padding:10px 13px; border-radius:8px; font-size:13px; margin-bottom:16px;
-      display:flex; align-items:flex-start; gap:8px; line-height:1.45;
+      padding: 10px 13px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.45;
     }
-    .alert-err { background:#fef2f2; color:#991b1b; border:1px solid #fecaca; }
-    .alert-ok  { background:#f0fdf4; color:#166534; border:1px solid #bbf7d0; }
+
+    .alert-err {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    .alert-ok {
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
 
     /* ═══════════════════════════════════
        DASHBOARD SHELL
     ═══════════════════════════════════ */
-    #dashboard { display:flex; min-height:100vh; }
+    #dashboard {
+      display: flex;
+      min-height: 100vh;
+    }
 
     /* ── SIDEBAR ── */
     .sidebar {
-      width:220px; min-width:220px; background:var(--navy); display:flex; flex-direction:column;
-      position:fixed; top:0; left:0; bottom:0; z-index:100;
+      width: 220px;
+      min-width: 220px;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 100;
     }
+
     .sb-logo {
-      padding:20px 16px 16px; border-bottom:1px solid rgba(255,255,255,.07);
-      display:flex; align-items:center; gap:10px;
+      padding: 20px 16px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, .07);
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
+
     .sb-logo .lbox {
-      width:34px; height:34px; background:var(--green); border-radius:9px;
-      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+      width: 34px;
+      height: 34px;
+      background: var(--green);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
-    .sb-logo .lbox svg { width:20px; height:20px; fill:#fff; }
-    .sb-logo span { color:#fff; font-weight:700; font-size:15px; font-family:'Playfair Display',serif; }
 
-    .sb-user { padding:14px 16px; border-bottom:1px solid rgba(255,255,255,.07); }
-    .sb-user .uname { color:#fff; font-size:13px; font-weight:600; }
-    .sb-user .uid   { color:rgba(255,255,255,.35); font-size:11px; margin-top:1px; }
+    .sb-logo .lbox svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
 
-    .sb-nav { flex:1; padding:12px 10px; overflow-y:auto; }
-    .sb-sec  { color:rgba(160,174,192,.45); font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:8px 6px 4px; }
+    .sb-logo span {
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .sb-user {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, .07);
+    }
+
+    .sb-user .uname {
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .sb-user .uid {
+      color: rgba(255, 255, 255, .35);
+      font-size: 11px;
+      margin-top: 1px;
+    }
+
+    .sb-nav {
+      flex: 1;
+      padding: 12px 10px;
+      overflow-y: auto;
+    }
+
+    .sb-sec {
+      color: rgba(160, 174, 192, .45);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 8px 6px 4px;
+    }
 
     .nv {
-      display:flex; align-items:center; gap:9px; padding:9px 10px; border-radius:8px;
-      color:rgba(255,255,255,.5); font-size:13px; cursor:pointer; transition:background .15s,color .15s;
-      margin-bottom:1px; border:none; background:none; width:100%; text-align:left; font-family:inherit;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      color: rgba(255, 255, 255, .5);
+      font-size: 13px;
+      cursor: pointer;
+      transition: background .15s, color .15s;
+      margin-bottom: 1px;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
     }
-    .nv svg { width:16px; height:16px; flex-shrink:0; }
-    .nv:hover { background:rgba(255,255,255,.07); color:#fff; }
-    .nv.active { background:rgba(255,255,255,.11); color:#fff; }
 
-    .sb-bot { padding:12px 10px; border-top:1px solid rgba(255,255,255,.07); }
-    .logout-btn {
-      display:flex; align-items:center; gap:9px; padding:9px 10px; border-radius:8px;
-      color:#f87171; font-size:13px; cursor:pointer; transition:background .15s;
-      border:none; background:none; width:100%; text-align:left; font-family:inherit;
+    .nv svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
     }
-    .logout-btn svg { width:16px; height:16px; }
-    .logout-btn:hover { background:rgba(248,113,113,.1); }
+
+    .nv:hover {
+      background: rgba(255, 255, 255, .07);
+      color: #fff;
+    }
+
+    .nv.active {
+      background: rgba(255, 255, 255, .11);
+      color: #fff;
+    }
+
+    .sb-bot {
+      padding: 12px 10px;
+      border-top: 1px solid rgba(255, 255, 255, .07);
+    }
+
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      color: #f87171;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background .15s;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+    }
+
+    .logout-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .logout-btn:hover {
+      background: rgba(248, 113, 113, .1);
+    }
 
     /* ── MAIN ── */
-    .main { flex:1; margin-left:220px; padding:28px 32px; min-height:100vh; }
+    .main {
+      flex: 1;
+      margin-left: 220px;
+      padding: 28px 32px;
+      min-height: 100vh;
+    }
 
-    .ph { margin-bottom:22px; }
-    .ph h2 { font-size:21px; font-weight:700; }
-    .ph p  { font-size:13px; color:var(--text2); margin-top:3px; }
+    .ph {
+      margin-bottom: 22px;
+    }
+
+    .ph h2 {
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .ph p {
+      font-size: 13px;
+      color: var(--text2);
+      margin-top: 3px;
+    }
 
     /* ─── PAGE VIEWS ─── */
-    .pv { display:none; }
-    .pv.active { display:block; }
+    .pv {
+      display: none;
+    }
+
+    .pv.active {
+      display: block;
+    }
 
     /* ═══════════════════════════════════
        OVERVIEW
     ═══════════════════════════════════ */
     .bal-card {
-      background:linear-gradient(135deg,var(--navy) 0%,var(--navy3) 100%);
-      border-radius:var(--r); padding:28px 28px 24px; margin-bottom:20px; position:relative; overflow:hidden;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy3) 100%);
+      border-radius: var(--r);
+      padding: 28px 28px 24px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
     }
+
     .bal-card::after {
-      content:''; position:absolute; right:-40px; top:-40px;
-      width:220px; height:220px; border-radius:50%;
-      background:rgba(255,255,255,.04);
+      content: '';
+      position: absolute;
+      right: -40px;
+      top: -40px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .04);
     }
-    .bal-card .bl  { font-size:12px; color:rgba(255,255,255,.5); letter-spacing:.06em; text-transform:uppercase; }
-    .bal-card .bv  { font-family:'Playfair Display',serif; font-size:40px; color:#fff; margin:4px 0; }
-    .bal-card .bid { font-size:12px; color:rgba(255,255,255,.3); }
 
-    .stat-row { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:20px; }
+    .bal-card .bl {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .5);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .bal-card .bv {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px;
+      color: #fff;
+      margin: 4px 0;
+    }
+
+    .bal-card .bid {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .3);
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
     .stat {
-      background:var(--surface); border:1px solid var(--border); border-radius:var(--r);
-      padding:18px 20px; display:flex; align-items:center; gap:14px; box-shadow:var(--shadow-sm);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: var(--shadow-sm);
     }
-    .stat-ic { width:42px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-    .stat-ic svg { width:20px; height:20px; }
-    .stat-ic.g { background:#f0fdf4; color:var(--green); }
-    .stat-ic.b { background:#eff6ff; color:var(--blue); }
-    .stat-ic.a { background:#fffbeb; color:var(--amber); }
-    .stat-lbl { font-size:12px; color:var(--text2); }
-    .stat-val { font-size:20px; font-weight:700; color:var(--text); margin-top:1px; }
 
-    .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); padding:22px 24px; box-shadow:var(--shadow-sm); margin-bottom:18px; }
-    .card-title { font-size:15px; font-weight:700; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
-    .card-title svg { width:16px; height:16px; color:var(--blue); }
+    .stat-ic {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .stat-ic svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .stat-ic.g {
+      background: #f0fdf4;
+      color: var(--green);
+    }
+
+    .stat-ic.b {
+      background: #eff6ff;
+      color: var(--blue);
+    }
+
+    .stat-ic.a {
+      background: #fffbeb;
+      color: var(--amber);
+    }
+
+    .stat-lbl {
+      font-size: 12px;
+      color: var(--text2);
+    }
+
+    .stat-val {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 1px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 22px 24px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 18px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title svg {
+      width: 16px;
+      height: 16px;
+      color: var(--blue);
+    }
 
     /* TXN ITEMS */
-    .txn { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
-    .txn:last-child { border-bottom:none; padding-bottom:0; }
-    .txn-dot { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-    .txn-dot svg { width:16px; height:16px; }
-    .txn-dot.d { background:#f0fdf4; color:var(--green); }
-    .txn-dot.w { background:#eff6ff; color:var(--blue); }
-    .txn-inf { flex:1; }
-    .txn-lbl { font-size:13px; font-weight:600; }
-    .txn-time { font-size:11px; color:var(--text3); }
-    .txn-amt { font-size:14px; font-weight:700; }
-    .txn-amt.d { color:var(--green); }
-    .txn-amt.w { color:var(--red); }
-    .empty-msg { text-align:center; color:var(--text3); font-size:13px; padding:20px 0; }
+    .txn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .txn:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .txn-dot {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .txn-dot svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .txn-dot.d {
+      background: #f0fdf4;
+      color: var(--green);
+    }
+
+    .txn-dot.w {
+      background: #eff6ff;
+      color: var(--blue);
+    }
+
+    .txn-inf {
+      flex: 1;
+    }
+
+    .txn-lbl {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .txn-time {
+      font-size: 11px;
+      color: var(--text3);
+    }
+
+    .txn-amt {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .txn-amt.d {
+      color: var(--green);
+    }
+
+    .txn-amt.w {
+      color: var(--red);
+    }
+
+    .empty-msg {
+      text-align: center;
+      color: var(--text3);
+      font-size: 13px;
+      padding: 20px 0;
+    }
 
     /* ═══════════════════════════════════
        TRANSACTIONS PAGE
     ═══════════════════════════════════ */
-    .tx-actions { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:18px; }
-    .tx-box { border:1.5px solid var(--border); border-radius:12px; padding:18px; background:var(--surface); }
-    .tx-box label { display:block; font-size:13px; font-weight:600; color:var(--text2); margin-bottom:10px; }
-    .tx-row { display:flex; gap:8px; }
-    .tx-row input {
-      flex:1; padding:10px 12px; border:1.5px solid var(--border); border-radius:8px;
-      font-size:14px; font-family:inherit; outline:none; background:var(--surface2); transition:border .18s;
+    .tx-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 18px;
     }
-    .tx-row input:focus { border-color:var(--blue); }
-    .btn-dep { padding:10px 16px; background:var(--green); color:#fff; border:none; border-radius:8px; font-size:13px; font-weight:600; font-family:inherit; cursor:pointer; transition:background .15s; }
-    .btn-dep:hover { background:var(--green-lt); }
-    .btn-wit { padding:10px 16px; background:var(--navy); color:#fff; border:none; border-radius:8px; font-size:13px; font-weight:600; font-family:inherit; cursor:pointer; transition:background .15s; }
-    .btn-wit:hover { background:var(--navy3); }
+
+    .tx-box {
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      background: var(--surface);
+    }
+
+    .tx-box label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text2);
+      margin-bottom: 10px;
+    }
+
+    .tx-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tx-row input {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      background: var(--surface2);
+      transition: border .18s;
+    }
+
+    .tx-row input:focus {
+      border-color: var(--blue);
+    }
+
+    .btn-dep {
+      padding: 10px 16px;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background .15s;
+    }
+
+    .btn-dep:hover {
+      background: var(--green-lt);
+    }
+
+    .btn-wit {
+      padding: 10px 16px;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background .15s;
+    }
+
+    .btn-wit:hover {
+      background: var(--navy3);
+    }
 
     /* ═══════════════════════════════════
        LOAN PAGE — CARD GRID
     ═══════════════════════════════════ */
-    .cibil-row { display:flex; gap:10px; align-items:center; margin-bottom:6px; }
-    .cibil-row input {
-      width:150px; padding:10px 12px; border:1.5px solid var(--border); border-radius:8px;
-      font-size:14px; font-family:inherit; outline:none; background:var(--surface2);
+    .cibil-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 6px;
     }
-    .cibil-row input:focus { border-color:var(--blue); }
-    .btn-chk { padding:10px 18px; background:var(--navy); color:#fff; border:none; border-radius:8px; font-size:13px; font-weight:600; font-family:inherit; cursor:pointer; }
-    .badge { padding:5px 12px; border-radius:99px; font-size:12px; font-weight:600; }
-    .badge.ok  { background:#f0fdf4; color:var(--green); }
-    .badge.no  { background:#fef2f2; color:var(--red); }
 
-    .loan-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:18px; }
+    .cibil-row input {
+      width: 150px;
+      padding: 10px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      background: var(--surface2);
+    }
+
+    .cibil-row input:focus {
+      border-color: var(--blue);
+    }
+
+    .btn-chk {
+      padding: 10px 18px;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .badge {
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge.ok {
+      background: #f0fdf4;
+      color: var(--green);
+    }
+
+    .badge.no {
+      background: #fef2f2;
+      color: var(--red);
+    }
+
+    .loan-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
     .loan-card {
-      border:1.5px solid var(--border); border-radius:12px; padding:18px 16px;
-      cursor:pointer; transition:border-color .2s,box-shadow .2s,transform .15s;
-      background:#fff; position:relative; overflow:hidden;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 16px;
+      cursor: pointer;
+      transition: border-color .2s, box-shadow .2s, transform .15s;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
     }
-    .loan-card:hover { border-color:var(--blue); box-shadow:0 4px 20px rgba(37,99,235,.12); transform:translateY(-2px); }
-    .loan-card.selected { border-color:var(--blue); background:#eff6ff; }
-    .loan-card .l-icon { font-size:26px; margin-bottom:8px; }
-    .loan-card .l-name { font-size:14px; font-weight:700; color:var(--text); }
-    .loan-card .l-rate { font-size:11px; color:var(--text3); margin-top:3px; }
+
+    .loan-card:hover {
+      border-color: var(--blue);
+      box-shadow: 0 4px 20px rgba(37, 99, 235, .12);
+      transform: translateY(-2px);
+    }
+
+    .loan-card.selected {
+      border-color: var(--blue);
+      background: #eff6ff;
+    }
+
+    .loan-card .l-icon {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .loan-card .l-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .loan-card .l-rate {
+      font-size: 11px;
+      color: var(--text3);
+      margin-top: 3px;
+    }
+
     .loan-card .l-arrow {
-      position:absolute; right:14px; top:50%; transform:translateY(-50%);
-      width:28px; height:28px; border-radius:50%; background:var(--bg);
-      display:flex; align-items:center; justify-content:center;
-      transition:background .2s;
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
     }
-    .loan-card:hover .l-arrow { background:var(--blue); }
-    .loan-card:hover .l-arrow svg { color:#fff; }
-    .loan-card .l-arrow svg { width:14px; height:14px; color:var(--text3); transition:color .2s; }
+
+    .loan-card:hover .l-arrow {
+      background: var(--blue);
+    }
+
+    .loan-card:hover .l-arrow svg {
+      color: #fff;
+    }
+
+    .loan-card .l-arrow svg {
+      width: 14px;
+      height: 14px;
+      color: var(--text3);
+      transition: color .2s;
+    }
 
     /* ═══════════════════════════════════
        LOAN DETAIL PAGE
     ═══════════════════════════════════ */
     .back-btn {
-      display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:600;
-      color:var(--blue); cursor:pointer; border:none; background:none; font-family:inherit;
-      margin-bottom:20px; padding:0;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blue);
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: inherit;
+      margin-bottom: 20px;
+      padding: 0;
     }
-    .back-btn svg { width:16px; height:16px; }
-    .back-btn:hover { text-decoration:underline; }
+
+    .back-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .back-btn:hover {
+      text-decoration: underline;
+    }
 
     .loan-detail-header {
-      background:linear-gradient(135deg,var(--navy) 0%,var(--navy3) 100%);
-      border-radius:var(--r); padding:28px 28px 24px; margin-bottom:20px;
-      display:flex; align-items:center; gap:20px; position:relative; overflow:hidden;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy3) 100%);
+      border-radius: var(--r);
+      padding: 28px 28px 24px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
     }
+
     .loan-detail-header::after {
-      content:''; position:absolute; right:-30px; top:-30px;
-      width:180px; height:180px; border-radius:50%; background:rgba(255,255,255,.05);
+      content: '';
+      position: absolute;
+      right: -30px;
+      top: -30px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .05);
     }
-    .loan-detail-icon { font-size:44px; }
-    .loan-detail-info { flex:1; }
-    .loan-detail-info h2 { font-family:'Playfair Display',serif; color:#fff; font-size:24px; }
+
+    .loan-detail-icon {
+      font-size: 44px;
+    }
+
+    .loan-detail-info {
+      flex: 1;
+    }
+
+    .loan-detail-info h2 {
+      font-family: 'Playfair Display', serif;
+      color: #fff;
+      font-size: 24px;
+    }
+
     .loan-detail-info .rate-badge {
-      display:inline-block; margin-top:6px; background:rgba(16,185,129,.2);
-      border:1px solid rgba(16,185,129,.4); color:#6ee7b7;
-      padding:4px 12px; border-radius:99px; font-size:12px; font-weight:600;
+      display: inline-block;
+      margin-top: 6px;
+      background: rgba(16, 185, 129, .2);
+      border: 1px solid rgba(16, 185, 129, .4);
+      color: #6ee7b7;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
     }
-    .loan-detail-info p { color:rgba(255,255,255,.55); font-size:13px; margin-top:4px; }
+
+    .loan-detail-info p {
+      color: rgba(255, 255, 255, .55);
+      font-size: 13px;
+      margin-top: 4px;
+    }
 
     /* KEY FACTS */
-    .facts-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:18px; }
-    .fact { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px 18px; }
-    .fact .f-lbl { font-size:11px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:.06em; }
-    .fact .f-val { font-size:18px; font-weight:700; color:var(--text); margin-top:4px; }
-    .fact .f-sub { font-size:11px; color:var(--text3); margin-top:2px; }
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .fact {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+
+    .fact .f-lbl {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .fact .f-val {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 4px;
+    }
+
+    .fact .f-sub {
+      font-size: 11px;
+      color: var(--text3);
+      margin-top: 2px;
+    }
 
     /* APPLICATION FORM */
-    .app-form { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); padding:24px; }
-    .app-form h3 { font-size:16px; font-weight:700; margin-bottom:6px; }
-    .app-form .form-desc { font-size:13px; color:var(--text2); margin-bottom:22px; }
+    .app-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 24px;
+    }
 
-    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-    .form-grid .full { grid-column:1/-1; }
+    .app-form h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .app-form .form-desc {
+      font-size: 13px;
+      color: var(--text2);
+      margin-bottom: 22px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-grid .full {
+      grid-column: 1/-1;
+    }
 
     .fg2 label {
-      display:block; font-size:12px; font-weight:600; color:var(--text2);
-      text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px;
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 6px;
     }
-    .fg2 input, .fg2 select, .fg2 textarea {
-      width:100%; padding:10px 12px; border:1.5px solid var(--border);
-      border-radius:9px; font-size:14px; font-family:inherit; background:var(--surface2);
-      color:var(--text); outline:none; transition:border .18s;
-    }
-    .fg2 input:focus, .fg2 select:focus, .fg2 textarea:focus {
-      border-color:var(--blue); background:#fff;
-    }
-    .fg2 textarea { resize:vertical; min-height:80px; }
-    .fg2 select { appearance:none; cursor:pointer; }
 
-    .required-note { font-size:11px; color:var(--text3); margin-top:4px; }
-    .required-mark { color:var(--red); }
+    .fg2 input,
+    .fg2 select,
+    .fg2 textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 9px;
+      font-size: 14px;
+      font-family: inherit;
+      background: var(--surface2);
+      color: var(--text);
+      outline: none;
+      transition: border .18s;
+    }
 
-    .submit-row { margin-top:22px; display:flex; align-items:center; gap:14px; }
+    .fg2 input:focus,
+    .fg2 select:focus,
+    .fg2 textarea:focus {
+      border-color: var(--blue);
+      background: #fff;
+    }
+
+    .fg2 textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .fg2 select {
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .required-note {
+      font-size: 11px;
+      color: var(--text3);
+      margin-top: 4px;
+    }
+
+    .required-mark {
+      color: var(--red);
+    }
+
+    .submit-row {
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
     .btn-submit {
-      padding:13px 32px; background:var(--green); color:#fff; border:none; border-radius:10px;
-      font-size:15px; font-weight:600; font-family:inherit; cursor:pointer; transition:background .15s;
+      padding: 13px 32px;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background .15s;
     }
-    .btn-submit:hover { background:var(--green-lt); }
+
+    .btn-submit:hover {
+      background: var(--green-lt);
+    }
+
     .btn-cancel-form {
-      padding:13px 20px; background:none; border:1.5px solid var(--border); border-radius:10px;
-      font-size:15px; font-weight:600; font-family:inherit; cursor:pointer; color:var(--text2); transition:background .15s;
+      padding: 13px 20px;
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      color: var(--text2);
+      transition: background .15s;
     }
-    .btn-cancel-form:hover { background:var(--bg); }
+
+    .btn-cancel-form:hover {
+      background: var(--bg);
+    }
 
     /* ── eligibility tips ── */
-    .elig-tips { background:#fffbeb; border:1px solid #fde68a; border-radius:10px; padding:14px 16px; margin-bottom:16px; }
-    .elig-tips h4 { font-size:13px; font-weight:700; color:#92400e; margin-bottom:6px; }
-    .elig-tips ul { padding-left:16px; }
-    .elig-tips li { font-size:12px; color:#92400e; margin-bottom:3px; }
+    .elig-tips {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+
+    .elig-tips h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #92400e;
+      margin-bottom: 6px;
+    }
+
+    .elig-tips ul {
+      padding-left: 16px;
+    }
+
+    .elig-tips li {
+      font-size: 12px;
+      color: #92400e;
+      margin-bottom: 3px;
+    }
 
     /* ═══════════════════════════════════
        PROFILE PAGE
     ═══════════════════════════════════ */
-    .profile-hero { display:flex; align-items:center; gap:18px; margin-bottom:22px; }
-    .p-avatar { width:64px; height:64px; border-radius:50%; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:700; flex-shrink:0; }
-    .p-info h3 { font-size:19px; font-weight:700; }
-    .p-info p  { font-size:13px; color:var(--text2); margin-top:2px; }
-    .p-table { width:100%; border-collapse:collapse; font-size:14px; }
-    .p-table td { padding:10px 0; }
-    .p-table tr + tr td { border-top:1px solid var(--border); }
-    .p-table .lbl { color:var(--text2); width:40%; }
-    .p-table .val { font-weight:600; }
-    .status-pill { background:#f0fdf4; color:var(--green); padding:3px 10px; border-radius:99px; font-size:12px; font-weight:600; }
+    .profile-hero {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .p-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .p-info h3 {
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    .p-info p {
+      font-size: 13px;
+      color: var(--text2);
+      margin-top: 2px;
+    }
+
+    .p-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .p-table td {
+      padding: 10px 0;
+    }
+
+    .p-table tr+tr td {
+      border-top: 1px solid var(--border);
+    }
+
+    .p-table .lbl {
+      color: var(--text2);
+      width: 40%;
+    }
+
+    .p-table .val {
+      font-weight: 600;
+    }
+
+    .status-pill {
+      background: #f0fdf4;
+      color: var(--green);
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
+    }
 
     /* ═══════════════════════════════════
        MODAL
     ═══════════════════════════════════ */
-    .overlay { position:fixed; inset:0; background:rgba(0,0,0,.45); display:flex; align-items:center; justify-content:center; z-index:999; padding:24px; }
-    .modal  { background:#fff; border-radius:16px; padding:28px; max-width:420px; width:100%; box-shadow:var(--shadow-lg); }
-    .modal h3  { font-size:17px; font-weight:700; margin-bottom:6px; }
-    .modal p   { font-size:13px; color:var(--text2); margin-bottom:16px; line-height:1.55; }
-    .m-detail  { background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:14px; margin-bottom:18px; }
-    .m-row     { display:flex; justify-content:space-between; font-size:13px; padding:4px 0; }
-    .m-row .ml { color:var(--text2); }
-    .m-row .mv { font-weight:600; }
-    .m-btns    { display:flex; gap:10px; justify-content:flex-end; }
-    .btn-cnl   { padding:10px 18px; background:none; border:1.5px solid var(--border); border-radius:8px; font-size:13px; font-weight:600; font-family:inherit; cursor:pointer; color:var(--text2); }
-    .btn-cfm   { padding:10px 18px; background:var(--green); color:#fff; border:none; border-radius:8px; font-size:13px; font-weight:600; font-family:inherit; cursor:pointer; }
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 24px;
+    }
+
+    .modal {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .modal p {
+      font-size: 13px;
+      color: var(--text2);
+      margin-bottom: 16px;
+      line-height: 1.55;
+    }
+
+    .m-detail {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 18px;
+    }
+
+    .m-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      padding: 4px 0;
+    }
+
+    .m-row .ml {
+      color: var(--text2);
+    }
+
+    .m-row .mv {
+      font-weight: 600;
+    }
+
+    .m-btns {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .btn-cnl {
+      padding: 10px 18px;
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      color: var(--text2);
+    }
+
+    .btn-cfm {
+      padding: 10px 18px;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+    }
 
     /* ═══════════════════════════════════
        SUCCESS SCREEN
     ═══════════════════════════════════ */
-    .success-screen { text-align:center; padding:40px 24px; }
-    .success-screen .tick { width:64px; height:64px; background:var(--green); border-radius:50%; display:inline-flex; align-items:center; justify-content:center; margin-bottom:16px; }
-    .success-screen .tick svg { width:32px; height:32px; color:#fff; }
-    .success-screen h3 { font-size:20px; font-weight:700; margin-bottom:8px; }
-    .success-screen p  { font-size:14px; color:var(--text2); margin-bottom:24px; }
-    .ref-box { background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:14px 18px; display:inline-block; margin-bottom:24px; }
-    .ref-lbl { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:.06em; }
-    .ref-num { font-size:20px; font-weight:700; color:var(--navy); font-family:monospace; }
+    .success-screen {
+      text-align: center;
+      padding: 40px 24px;
+    }
+
+    .success-screen .tick {
+      width: 64px;
+      height: 64px;
+      background: var(--green);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .success-screen .tick svg {
+      width: 32px;
+      height: 32px;
+      color: #fff;
+    }
+
+    .success-screen h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .success-screen p {
+      font-size: 14px;
+      color: var(--text2);
+      margin-bottom: 24px;
+    }
+
+    .ref-box {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: inline-block;
+      margin-bottom: 24px;
+    }
+
+    .ref-lbl {
+      font-size: 11px;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .ref-num {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      font-family: monospace;
+    }
 
     /* TOAST */
-    #toasts { position:fixed; bottom:24px; right:24px; z-index:2000; display:flex; flex-direction:column; gap:8px; }
-    .toast { padding:11px 16px; border-radius:10px; font-size:13px; font-weight:500; min-width:220px; display:flex; align-items:center; gap:9px; animation:tin .3s ease; box-shadow:var(--shadow); }
-    .toast.ok  { background:#166534; color:#fff; }
-    .toast.err { background:#991b1b; color:#fff; }
-    .toast.inf { background:var(--navy); color:#fff; }
-    @keyframes tin { from{transform:translateX(50px);opacity:0} to{transform:translateX(0);opacity:1} }
+    #toasts {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
-    .hidden { display:none!important; }
+    .toast {
+      padding: 11px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      min-width: 220px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      animation: tin .3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .toast.ok {
+      background: #166534;
+      color: #fff;
+    }
+
+    .toast.err {
+      background: #991b1b;
+      color: #fff;
+    }
+
+    .toast.inf {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    @keyframes tin {
+      from {
+        transform: translateX(50px);
+        opacity: 0
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1
+      }
+    }
+
+    .hidden {
+      display: none !important;
+    }
   </style>
 </head>
+
 <body>
 
-<!-- ═══════════ AUTH ═══════════ -->
-<div id="authPage">
-  <div class="auth-wrap">
-    <div class="auth-brand">
-      <div class="brand-mark">
-        <svg viewBox="0 0 24 24"><path d="M12 2L3 7v1h18V7L12 2zm-9 3.5V20h2V10.5H5zm4 0V20h2V10.5H9zm4 0V20h2V10.5h-2zm4 0V20h2V10.5h-2zM3 21v1h18v-1H3z"/></svg>
+  <!-- ═══════════ AUTH ═══════════ -->
+  <div id="authPage">
+    <div class="auth-wrap">
+      <div class="auth-brand">
+        <div class="brand-mark">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2L3 7v1h18V7L12 2zm-9 3.5V20h2V10.5H5zm4 0V20h2V10.5H9zm4 0V20h2V10.5h-2zm4 0V20h2V10.5h-2zM3 21v1h18v-1H3z" />
+          </svg>
+        </div>
+        <h1>Sinova Bank</h1>
+        <p>Secure · Reliable · Modern</p>
       </div>
-      <h1>NexBank</h1>
-      <p>Secure · Reliable · Modern</p>
-    </div>
 
-    <!-- LOGIN -->
-    <div class="auth-card" id="loginCard">
-      <h2>Welcome back</h2>
-      <p class="sub">Sign in to your account</p>
-      <div id="loginAlert" class="hidden"></div>
-      <div class="fg">
-        <label>Full Name</label>
-        <div class="inp-wrap">
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <input id="lName" type="text" placeholder="Your registered name"/>
+      <!-- LOGIN -->
+      <div class="auth-card" id="loginCard">
+        <h2>Welcome back</h2>
+        <p class="sub">Sign in to your account</p>
+        <div id="loginAlert" class="hidden"></div>
+        <div class="fg">
+          <label>Full Name</label>
+          <div class="inp-wrap">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <input id="lName" type="text" placeholder="Your registered name" />
+          </div>
         </div>
-      </div>
-      <div class="fg">
-        <label>Customer ID</label>
-        <div class="inp-wrap">
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>
-          <input id="lId" type="text" placeholder="e.g. A8884"/>
+        <div class="fg">
+          <label>Customer ID</label>
+          <div class="inp-wrap">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="16" rx="2" />
+              <path d="M7 8h10M7 12h6" />
+            </svg>
+            <input id="lId" type="text" placeholder="e.g. A8884" />
+          </div>
         </div>
+        <button class="btn-main" id="loginBtn" onclick="doLogin()">Login</button>
+        <div class="auth-foot">New here? <a onclick="show('registerCard','loginCard')">Create account</a></div>
       </div>
-      <button class="btn-main" id="loginBtn" onclick="doLogin()">Login</button>
-      <div class="auth-foot">New here? <a onclick="show('registerCard','loginCard')">Create account</a></div>
-    </div>
 
-    <!-- REGISTER -->
-    <div class="auth-card hidden" id="registerCard">
-      <h2>Create Account</h2>
-      <p class="sub">Join NexBank today</p>
-      <div id="regAlert" class="hidden"></div>
-      <div class="fg">
-        <label>Full Name</label>
-        <div class="inp-wrap">
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <input id="rName" type="text" placeholder="Your full name"/>
+      <!-- REGISTER -->
+      <div class="auth-card hidden" id="registerCard">
+        <h2>Create Account</h2>
+        <p class="sub">Join Sinova Bank today</p>
+        <div id="regAlert" class="hidden"></div>
+        <div class="fg">
+          <label>Full Name</label>
+          <div class="inp-wrap">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <input id="rName" type="text" placeholder="Your full name" />
+          </div>
         </div>
-      </div>
-      <div class="fg">
-        <label>Customer ID</label>
-        <div class="inp-wrap">
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>
-          <input id="rId" type="text" placeholder="Choose a unique ID (min 4 chars)"/>
+        <div class="fg">
+          <label>Customer ID</label>
+          <div class="inp-wrap">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="16" rx="2" />
+              <path d="M7 8h10M7 12h6" />
+            </svg>
+            <input id="rId" type="text" placeholder="Choose a unique ID (min 4 chars)" />
+          </div>
         </div>
+        <button class="btn-main" id="regBtn" onclick="doRegister()">Create Account</button>
+        <div class="auth-foot">Have an account? <a onclick="show('loginCard','registerCard')">Login</a></div>
       </div>
-      <button class="btn-main" id="regBtn" onclick="doRegister()">Create Account</button>
-      <div class="auth-foot">Have an account? <a onclick="show('loginCard','registerCard')">Login</a></div>
     </div>
   </div>
-</div>
 
-<!-- ═══════════ DASHBOARD ═══════════ -->
-<div id="dashboard" class="hidden">
+  <!-- ═══════════ DASHBOARD ═══════════ -->
+  <div id="dashboard" class="hidden">
 
-  <!-- SIDEBAR -->
-  <nav class="sidebar">
-    <div class="sb-logo">
-      <div class="lbox"><svg viewBox="0 0 24 24"><path d="M12 2L3 7v1h18V7L12 2zm-9 3.5V20h2V10.5H5zm4 0V20h2V10.5H9zm4 0V20h2V10.5h-2zm4 0V20h2V10.5h-2zM3 21v1h18v-1H3z"/></svg></div>
-      <span>NexBank</span>
-    </div>
-    <div class="sb-user">
-      <div class="uname" id="sbName">—</div>
-      <div class="uid"   id="sbId">—</div>
-    </div>
-    <div class="sb-nav">
-      <div class="sb-sec">Main</div>
-      <button class="nv active" data-p="overview"     onclick="navTo('overview',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Overview</button>
-      <button class="nv" data-p="transactions" onclick="navTo('transactions',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Transactions</button>
-      <div class="sb-sec">Services</div>
-      <button class="nv" data-p="loans" onclick="navTo('loans',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Loan Section</button>
-      <button class="nv" data-p="profile" onclick="navTo('profile',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
-    </div>
-    <div class="sb-bot">
-      <button class="logout-btn" onclick="doLogout()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Logout</button>
-    </div>
-  </nav>
-
-  <!-- MAIN -->
-  <main class="main">
-
-    <!-- ── OVERVIEW ── -->
-    <div class="pv active" id="pv-overview">
-      <div class="ph"><h2 id="welcomeMsg">Welcome!</h2><p>Your account at a glance</p></div>
-      <div class="bal-card">
-        <div class="bl">Current Balance</div>
-        <div class="bv" id="balVal">₹0.00</div>
-        <div class="bid" id="balId">ID: ****</div>
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+      <div class="sb-logo">
+        <div class="lbox"><svg viewBox="0 0 24 24">
+            <path
+              d="M12 2L3 7v1h18V7L12 2zm-9 3.5V20h2V10.5H5zm4 0V20h2V10.5H9zm4 0V20h2V10.5h-2zm4 0V20h2V10.5h-2zM3 21v1h18v-1H3z" />
+          </svg></div>
+        <span>Sinova Bank</span>
       </div>
-      <div class="stat-row">
-        <div class="stat"><div class="stat-ic g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div><div><div class="stat-lbl">Total Deposited</div><div class="stat-val" id="statDep">₹0</div></div></div>
-        <div class="stat"><div class="stat-ic b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 6 10.5 15.5 15.5 10.5 23 18"/></svg></div><div><div class="stat-lbl">Total Withdrawn</div><div class="stat-val" id="statWit">₹0</div></div></div>
-        <div class="stat"><div class="stat-ic a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="stat-lbl">Transactions</div><div class="stat-val" id="statTxn">0</div></div></div>
+      <div class="sb-user">
+        <div class="uname" id="sbName">—</div>
+        <div class="uid" id="sbId">—</div>
       </div>
-      <div class="card">
-        <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Recent Activity</div>
-        <div id="recentList"><div class="empty-msg">No transactions yet</div></div>
+      <div class="sb-nav">
+        <div class="sb-sec">Main</div>
+        <button class="nv active" data-p="overview" onclick="navTo('overview',this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+          </svg>Overview</button>
+        <button class="nv" data-p="transactions" onclick="navTo('transactions',this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+          </svg>Transactions</button>
+        <div class="sb-sec">Services</div>
+        <button class="nv" data-p="loans" onclick="navTo('loans',this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+          </svg>Loan Section</button>
+        <button class="nv" data-p="profile" onclick="navTo('profile',this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>Profile</button>
       </div>
-    </div>
+      <div class="sb-bot">
+        <button class="logout-btn" onclick="doLogout()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" y1="12" x2="9" y2="12" />
+          </svg>Logout</button>
+      </div>
+    </nav>
 
-    <!-- ── TRANSACTIONS ── -->
-    <div class="pv" id="pv-transactions">
-      <div class="ph"><h2>Transactions</h2><p>Deposit or withdraw money</p></div>
-      <div class="tx-actions">
-        <div class="tx-box">
-          <label>💰 Deposit Money</label>
-          <div class="tx-row">
-            <input type="number" id="depAmt" placeholder="₹ Enter amount" min="1"/>
-            <button class="btn-dep" onclick="doDeposit()">Deposit</button>
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- ── OVERVIEW ── -->
+      <div class="pv active" id="pv-overview">
+        <div class="ph">
+          <h2 id="welcomeMsg">Welcome!</h2>
+          <p>Your account at a glance</p>
+        </div>
+        <div class="bal-card">
+          <div class="bl">Current Balance</div>
+          <div class="bv" id="balVal">₹0.00</div>
+          <div class="bid" id="balId">ID: ****</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-ic g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+              </svg></div>
+            <div>
+              <div class="stat-lbl">Total Deposited</div>
+              <div class="stat-val" id="statDep">₹0</div>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-ic b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="1 6 10.5 15.5 15.5 10.5 23 18" />
+              </svg></div>
+            <div>
+              <div class="stat-lbl">Total Withdrawn</div>
+              <div class="stat-val" id="statWit">₹0</div>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-ic a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg></div>
+            <div>
+              <div class="stat-lbl">Transactions</div>
+              <div class="stat-val" id="statTxn">0</div>
+            </div>
           </div>
         </div>
-        <div class="tx-box">
-          <label>🏧 Withdraw Money</label>
-          <div class="tx-row">
-            <input type="number" id="witAmt" placeholder="₹ Enter amount" min="1"/>
-            <button class="btn-wit" onclick="doWithdraw()">Withdraw</button>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>All Transactions</div>
-        <div id="allTxnList"><div class="empty-msg">No transactions yet</div></div>
-      </div>
-    </div>
-
-    <!-- ── LOANS — GRID VIEW ── -->
-    <div class="pv" id="pv-loans">
-      <div class="ph"><h2>Loan Section</h2><p>Check eligibility and apply</p></div>
-      <div class="card">
-        <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>CIBIL Eligibility Check</div>
-        <div style="font-size:13px;color:var(--text2);margin-bottom:10px;">Minimum score required: <strong>650</strong></div>
-        <div class="cibil-row">
-          <input type="number" id="cibilInp" placeholder="Enter score (300–900)" min="300" max="900"/>
-          <button class="btn-chk" onclick="checkCibil()">Check</button>
-          <span id="cibilBadge"></span>
-        </div>
-      </div>
-      <div id="loanGridSection" class="hidden">
         <div class="card">
-          <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Choose Loan Type — click a card to view details & apply</div>
-          <div class="loan-grid" id="loanGrid"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── LOAN DETAIL + APPLICATION FORM ── -->
-    <div class="pv" id="pv-loanDetail">
-      <button class="back-btn" onclick="backToLoans()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Back to Loans
-      </button>
-
-      <!-- HEADER -->
-      <div class="loan-detail-header" id="ldHeader">
-        <div class="loan-detail-icon" id="ldIcon">🏠</div>
-        <div class="loan-detail-info">
-          <h2 id="ldName">Home Loan</h2>
-          <span class="rate-badge" id="ldRate">9.5% – 11.5% p.a.</span>
-          <p id="ldDesc">Fulfil your dream of owning a home with our competitive rates.</p>
+          <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>Recent Activity</div>
+          <div id="recentList">
+            <div class="empty-msg">No transactions yet</div>
+          </div>
         </div>
       </div>
 
-      <!-- KEY FACTS -->
-      <div class="facts-grid" id="ldFacts"></div>
-
-      <!-- ELIGIBILITY TIPS -->
-      <div class="elig-tips" id="ldTips"></div>
-
-      <!-- APPLICATION FORM -->
-      <div class="app-form" id="ldForm">
-        <h3>Loan Application Form</h3>
-        <p class="form-desc">Fill in the details below. Fields marked <span class="required-mark">*</span> are mandatory.</p>
-        <div class="form-grid" id="formFields"></div>
-        <div class="submit-row">
-          <button class="btn-submit" onclick="submitLoan()">Submit Application</button>
-          <button class="btn-cancel-form" onclick="backToLoans()">Cancel</button>
+      <!-- ── TRANSACTIONS ── -->
+      <div class="pv" id="pv-transactions">
+        <div class="ph">
+          <h2>Transactions</h2>
+          <p>Deposit or withdraw money</p>
+        </div>
+        <div class="tx-actions">
+          <div class="tx-box">
+            <label>💰 Deposit Money</label>
+            <div class="tx-row">
+              <input type="number" id="depAmt" placeholder="₹ Enter amount" min="1" />
+              <button class="btn-dep" onclick="doDeposit()">Deposit</button>
+            </div>
+          </div>
+          <div class="tx-box">
+            <label>🏧 Withdraw Money</label>
+            <div class="tx-row">
+              <input type="number" id="witAmt" placeholder="₹ Enter amount" min="1" />
+              <button class="btn-wit" onclick="doWithdraw()">Withdraw</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>All Transactions</div>
+          <div id="allTxnList">
+            <div class="empty-msg">No transactions yet</div>
+          </div>
         </div>
       </div>
 
-      <!-- SUCCESS (hidden until submitted) -->
-      <div class="success-screen hidden" id="ldSuccess">
-        <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <h3>Application Submitted!</h3>
-        <p>Our team will review your application and contact you within 3–5 business days.</p>
-        <div class="ref-box">
-          <div class="ref-lbl">Reference Number</div>
-          <div class="ref-num" id="refNum">—</div>
-        </div><br/>
-        <button class="btn-submit" onclick="backToLoans()">Back to Loans</button>
-      </div>
-    </div>
-
-    <!-- ── PROFILE ── -->
-    <div class="pv" id="pv-profile">
-      <div class="ph"><h2>Profile</h2><p>Your account information</p></div>
-      <div class="card">
-        <div class="profile-hero">
-          <div class="p-avatar" id="pAvatar">A</div>
-          <div class="p-info"><h3 id="pName">—</h3><p id="pIdLine">—</p></div>
+      <!-- ── LOANS — GRID VIEW ── -->
+      <div class="pv" id="pv-loans">
+        <div class="ph">
+          <h2>Loan Section</h2>
+          <p>Check eligibility and apply</p>
         </div>
-        <table class="p-table">
-          <tr><td class="lbl">Full Name</td><td class="val" id="ptName">—</td></tr>
-          <tr><td class="lbl">Customer ID</td><td class="val" id="ptId">—</td></tr>
-          <tr><td class="lbl">Account Status</td><td><span class="status-pill">Active</span></td></tr>
-          <tr><td class="lbl">Current Balance</td><td class="val" id="ptBal">₹0.00</td></tr>
-        </table>
+        <div class="card">
+          <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>CIBIL Eligibility Check</div>
+          <div style="font-size:13px;color:var(--text2);margin-bottom:10px;">Minimum score required:
+            <strong>650</strong></div>
+          <div class="cibil-row">
+            <input type="number" id="cibilInp" placeholder="Enter score (300–900)" min="300" max="900" />
+            <button class="btn-chk" onclick="checkCibil()">Check</button>
+            <span id="cibilBadge"></span>
+          </div>
+        </div>
+        <div id="loanGridSection" class="hidden">
+          <div class="card">
+            <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              </svg>Choose Loan Type — click a card to view details & apply</div>
+            <div class="loan-grid" id="loanGrid"></div>
+          </div>
+        </div>
       </div>
-    </div>
 
-  </main>
-</div>
+      <!-- ── LOAN DETAIL + APPLICATION FORM ── -->
+      <div class="pv" id="pv-loanDetail">
+        <button class="back-btn" onclick="backToLoans()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>Back to Loans
+        </button>
 
-<!-- MODAL -->
-<div class="overlay hidden" id="modalOverlay">
-  <div class="modal">
-    <h3 id="mTitle">Confirm</h3>
-    <p id="mMsg">Are you sure?</p>
-    <div class="m-detail" id="mDetail"></div>
-    <div class="m-btns">
-      <button class="btn-cnl" onclick="closeModal()">Cancel</button>
-      <button class="btn-cfm" id="mConfirm">Confirm</button>
+        <!-- HEADER -->
+        <div class="loan-detail-header" id="ldHeader">
+          <div class="loan-detail-icon" id="ldIcon">🏠</div>
+          <div class="loan-detail-info">
+            <h2 id="ldName">Home Loan</h2>
+            <span class="rate-badge" id="ldRate">9.5% – 11.5% p.a.</span>
+            <p id="ldDesc">Fulfil your dream of owning a home with our competitive rates.</p>
+          </div>
+        </div>
+
+        <!-- KEY FACTS -->
+        <div class="facts-grid" id="ldFacts"></div>
+
+        <!-- ELIGIBILITY TIPS -->
+        <div class="elig-tips" id="ldTips"></div>
+
+        <!-- APPLICATION FORM -->
+        <div class="app-form" id="ldForm">
+          <h3>Loan Application Form</h3>
+          <p class="form-desc">Fill in the details below. Fields marked <span class="required-mark">*</span> are
+            mandatory.</p>
+          <div class="form-grid" id="formFields"></div>
+          <div class="submit-row">
+            <button class="btn-submit" onclick="submitLoan()">Submit Application</button>
+            <button class="btn-cancel-form" onclick="backToLoans()">Cancel</button>
+          </div>
+        </div>
+
+        <!-- SUCCESS (hidden until submitted) -->
+        <div class="success-screen hidden" id="ldSuccess">
+          <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg></div>
+          <h3>Application Submitted!</h3>
+          <p>Our team will review your application and contact you within 3–5 business days.</p>
+          <div class="ref-box">
+            <div class="ref-lbl">Reference Number</div>
+            <div class="ref-num" id="refNum">—</div>
+          </div><br />
+          <button class="btn-submit" onclick="backToLoans()">Back to Loans</button>
+        </div>
+      </div>
+
+      <!-- ── PROFILE ── -->
+      <div class="pv" id="pv-profile">
+        <div class="ph">
+          <h2>Profile</h2>
+          <p>Your account information</p>
+        </div>
+        <div class="card">
+          <div class="profile-hero">
+            <div class="p-avatar" id="pAvatar">A</div>
+            <div class="p-info">
+              <h3 id="pName">—</h3>
+              <p id="pIdLine">—</p>
+            </div>
+          </div>
+          <table class="p-table">
+            <tr>
+              <td class="lbl">Full Name</td>
+              <td class="val" id="ptName">—</td>
+            </tr>
+            <tr>
+              <td class="lbl">Customer ID</td>
+              <td class="val" id="ptId">—</td>
+            </tr>
+            <tr>
+              <td class="lbl">Account Status</td>
+              <td><span class="status-pill">Active</span></td>
+            </tr>
+            <tr>
+              <td class="lbl">Current Balance</td>
+              <td class="val" id="ptBal">₹0.00</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- MODAL -->
+  <div class="overlay hidden" id="modalOverlay">
+    <div class="modal">
+      <h3 id="mTitle">Confirm</h3>
+      <p id="mMsg">Are you sure?</p>
+      <div class="m-detail" id="mDetail"></div>
+      <div class="m-btns">
+        <button class="btn-cnl" onclick="closeModal()">Cancel</button>
+        <button class="btn-cfm" id="mConfirm">Confirm</button>
+      </div>
     </div>
   </div>
-</div>
 
-<div id="toasts"></div>
+  <div id="toasts"></div>
 
-<script>
-/* ══════════════════════════════════════════
-   CONFIG
-══════════════════════════════════════════ */
-const API = 'http://localhost:8081/api';
+  <script>
+    /* ══════════════════════════════════════════
+       CONFIG
+    ══════════════════════════════════════════ */
+    const API = 'http://localhost:8081/api';
 
-/* ══════════════════════════════════════════
-   LOAN DEFINITIONS
-   Each loan has: icon, name, rate, desc,
-   facts[], tips[], fields[]
-   fields: { id, label, type, required, options?, placeholder? }
-══════════════════════════════════════════ */
-const LOANS = [
-  {
-    icon:'🏠', name:'Home Loan', rate:'9.5% – 11.5% p.a.',
-    desc:'Fulfil your dream of owning a home with our competitive interest rates and flexible repayment options.',
-    facts:[
-      {lbl:'Max Amount',val:'₹5 Crore',sub:'Up to 90% of property value'},
-      {lbl:'Tenure',val:'30 Years',sub:'Flexible repayment period'},
-      {lbl:'Processing Fee',val:'0.5%',sub:'Of loan amount, min ₹10,000'},
-    ],
-    tips:['CIBIL score ≥ 750 for best rates','Property must be legally approved','Minimum income ₹25,000/month','LTV ratio max 90%'],
-    fields:[
-      {id:'fullName',   label:'Full Name',              type:'text',   req:true,  ph:'As per Aadhaar'},
-      {id:'dob',        label:'Date of Birth',          type:'date',   req:true},
-      {id:'mobile',     label:'Mobile Number',          type:'tel',    req:true,  ph:'10-digit number'},
-      {id:'email',      label:'Email Address',          type:'email',  req:true,  ph:'your@email.com'},
-      {id:'pan',        label:'PAN Card Number',        type:'text',   req:true,  ph:'ABCDE1234F'},
-      {id:'aadhaar',    label:'Aadhaar Number',         type:'text',   req:true,  ph:'12-digit Aadhaar'},
-      {id:'empType',    label:'Employment Type',        type:'select', req:true,  options:['Salaried','Self-Employed','Business Owner']},
-      {id:'income',     label:'Monthly Income (₹)',     type:'number', req:true,  ph:'e.g. 75000'},
-      {id:'loanAmt',    label:'Loan Amount Required (₹)',type:'number',req:true,  ph:'e.g. 5000000'},
-      {id:'tenure',     label:'Loan Tenure (Years)',    type:'select', req:true,  options:['5','10','15','20','25','30']},
-      {id:'propAddr',   label:'Property Address',       type:'text',   req:true,  ph:'Complete address of property', cls:'full'},
-      {id:'propType',   label:'Property Type',          type:'select', req:true,  options:['Apartment','Independent House','Villa','Plot']},
-      {id:'propVal',    label:'Property Value (₹)',     type:'number', req:true,  ph:'Estimated market value'},
-      {id:'existLoan',  label:'Any Existing Loans?',    type:'select', req:false, options:['No','Yes — Home','Yes — Personal','Yes — Vehicle','Yes — Other']},
-    ]
-  },
-  {
-    icon:'💰', name:'Personal Loan', rate:'10% – 24% p.a.',
-    desc:'Quick funds for any personal need — medical, travel, wedding, or home renovation — with minimal documentation.',
-    facts:[
-      {lbl:'Max Amount',val:'₹40 Lakh',sub:'No collateral required'},
-      {lbl:'Tenure',val:'1–5 Years',sub:'Flexible repayment'},
-      {lbl:'Disbursal',val:'24–48 hrs',sub:'Fast track processing'},
-    ],
-    tips:['CIBIL score ≥ 700 recommended','Stable income for 6+ months','Low existing EMI obligations','Salaried preferred for lower rates'],
-    fields:[
-      {id:'fullName',  label:'Full Name',              type:'text',   req:true,  ph:'As per Aadhaar'},
-      {id:'dob',       label:'Date of Birth',          type:'date',   req:true},
-      {id:'mobile',    label:'Mobile Number',          type:'tel',    req:true,  ph:'10-digit number'},
-      {id:'email',     label:'Email Address',          type:'email',  req:true,  ph:'your@email.com'},
-      {id:'pan',       label:'PAN Card Number',        type:'text',   req:true,  ph:'ABCDE1234F'},
-      {id:'empType',   label:'Employment Type',        type:'select', req:true,  options:['Salaried','Self-Employed','Freelancer','Business Owner']},
-      {id:'employer',  label:'Employer / Company Name',type:'text',   req:true,  ph:'Current employer'},
-      {id:'income',    label:'Monthly Income (₹)',     type:'number', req:true,  ph:'Net take-home salary'},
-      {id:'loanAmt',   label:'Loan Amount Required (₹)',type:'number',req:true,  ph:'Max ₹40,00,000'},
-      {id:'tenure',    label:'Tenure (Months)',        type:'select', req:true,  options:['12','24','36','48','60']},
-      {id:'purpose',   label:'Loan Purpose',           type:'select', req:true,  options:['Medical Emergency','Travel','Wedding','Home Renovation','Education','Debt Consolidation','Other']},
-      {id:'existEmi',  label:'Current Monthly EMI (₹)',type:'number', req:false, ph:'0 if none'},
-    ]
-  },
-  {
-    icon:'🚗', name:'Vehicle Loan', rate:'7.5% – 13% p.a.',
-    desc:'Drive home your dream vehicle with our easy financing options for new and used cars, bikes, and commercial vehicles.',
-    facts:[
-      {lbl:'Max Amount',val:'₹1.5 Crore',sub:'Up to 100% on-road price'},
-      {lbl:'Tenure',val:'7 Years',sub:'Max repayment period'},
-      {lbl:'Down Payment',val:'0%',sub:'On select new vehicles'},
-    ],
-    tips:['CIBIL ≥ 700 for 0% down payment','New vehicle: 100% financing available','Used vehicle: max 85% value','Valid driving licence required'],
-    fields:[
-      {id:'fullName',  label:'Full Name',              type:'text',   req:true, ph:'As per driving licence'},
-      {id:'dob',       label:'Date of Birth',          type:'date',   req:true},
-      {id:'mobile',    label:'Mobile Number',          type:'tel',    req:true, ph:'10-digit number'},
-      {id:'email',     label:'Email Address',          type:'email',  req:true, ph:'your@email.com'},
-      {id:'pan',       label:'PAN Card Number',        type:'text',   req:true, ph:'ABCDE1234F'},
-      {id:'dlNumber',  label:'Driving Licence Number', type:'text',   req:true, ph:'DL number'},
-      {id:'vehType',   label:'Vehicle Type',           type:'select', req:true, options:['New Car','Used Car','New Bike','Used Bike','Commercial Vehicle','Electric Vehicle']},
-      {id:'vehBrand',  label:'Vehicle Brand & Model',  type:'text',   req:true, ph:'e.g. Maruti Swift ZXi'},
-      {id:'onRoadPx',  label:'On-Road Price (₹)',      type:'number', req:true, ph:'Dealer quote price'},
-      {id:'loanAmt',   label:'Loan Amount (₹)',        type:'number', req:true, ph:'Amount you need'},
-      {id:'tenure',    label:'Tenure (Months)',        type:'select', req:true, options:['12','24','36','48','60','72','84']},
-      {id:'income',    label:'Monthly Income (₹)',     type:'number', req:true, ph:'Net income'},
-    ]
-  },
-  {
-    icon:'🏢', name:'Business Loan', rate:'11% – 18% p.a.',
-    desc:'Fuel your business growth with working capital, machinery financing, or expansion loans tailored to your needs.',
-    facts:[
-      {lbl:'Max Amount',val:'₹2 Crore',sub:'Collateral-free options available'},
-      {lbl:'Tenure',val:'5 Years',sub:'Max repayment period'},
-      {lbl:'GST Required',val:'3 Years',sub:'Minimum business vintage'},
-    ],
-    tips:['Business operational for ≥ 3 years','GST registration mandatory','Profit-making for last 2 years','Business bank statements required'],
-    fields:[
-      {id:'ownerName',  label:'Owner / Proprietor Name', type:'text',  req:true, ph:'Full legal name'},
-      {id:'mobile',     label:'Mobile Number',           type:'tel',   req:true, ph:'10-digit'},
-      {id:'email',      label:'Email Address',           type:'email', req:true, ph:'business@email.com'},
-      {id:'pan',        label:'PAN (Business/Personal)', type:'text',  req:true, ph:'PAN number'},
-      {id:'bizName',    label:'Business Name',           type:'text',  req:true, ph:'Registered business name'},
-      {id:'bizType',    label:'Business Type',           type:'select',req:true, options:['Proprietorship','Partnership','Pvt Ltd','LLP','Public Ltd']},
-      {id:'gst',        label:'GST Number',              type:'text',  req:true, ph:'15-digit GSTIN'},
-      {id:'vintage',    label:'Business Vintage (Years)',type:'number',req:true, ph:'Years in operation'},
-      {id:'turnover',   label:'Annual Turnover (₹)',     type:'number',req:true, ph:'Last FY turnover'},
-      {id:'loanAmt',    label:'Loan Amount Required (₹)',type:'number',req:true, ph:'Amount needed'},
-      {id:'loanPurpose',label:'Loan Purpose',            type:'select',req:true, options:['Working Capital','Equipment Purchase','Expansion','Inventory','Debt Refinancing','Other']},
-      {id:'tenure',     label:'Tenure (Months)',         type:'select',req:true, options:['12','24','36','48','60']},
-    ]
-  },
-  {
-    icon:'🎓', name:'Education Loan', rate:'8% – 12% p.a.',
-    desc:'Invest in your future. Finance your higher education at top institutions in India or abroad with easy repayment after placement.',
-    facts:[
-      {lbl:'Max Amount',val:'₹1.5 Crore',sub:'Abroad; ₹75L for India'},
-      {lbl:'Moratorium',val:'Course + 1yr',sub:'Repayment starts after job'},
-      {lbl:'Tax Benefit',val:'Section 80E',sub:'Full interest deduction'},
-    ],
-    tips:['Admission letter from institution required','Parent/guardian as co-applicant','Collateral required above ₹7.5L','No processing fee for meritorious students'],
-    fields:[
-      {id:'stuName',    label:'Student Full Name',      type:'text',   req:true, ph:'As per 10th certificate'},
-      {id:'dob',        label:'Date of Birth',          type:'date',   req:true},
-      {id:'mobile',     label:'Mobile Number',          type:'tel',    req:true, ph:'10-digit'},
-      {id:'email',      label:'Email Address',          type:'email',  req:true, ph:'your@email.com'},
-      {id:'pan',        label:'Student PAN',            type:'text',   req:false, ph:'If available'},
-      {id:'aadhaar',    label:'Aadhaar Number',         type:'text',   req:true, ph:'12-digit'},
-      {id:'course',     label:'Course Name',            type:'text',   req:true, ph:'e.g. B.Tech CSE / MBA Finance'},
-      {id:'institute',  label:'Institution Name',       type:'text',   req:true, ph:'College/University name'},
-      {id:'country',    label:'Study Location',         type:'select', req:true, options:['India','USA','UK','Canada','Australia','Germany','Other']},
-      {id:'duration',   label:'Course Duration (Years)',type:'select', req:true, options:['1','2','3','4','5']},
-      {id:'totalFee',   label:'Total Course Fees (₹)',  type:'number', req:true, ph:'All-inclusive fee'},
-      {id:'loanAmt',    label:'Loan Amount Required (₹)',type:'number',req:true, ph:'Amount needed'},
-      {id:'coApplicant',label:'Co-Applicant Name',      type:'text',   req:true, ph:'Parent/Guardian name'},
-      {id:'coIncome',   label:'Co-Applicant Income (₹/month)',type:'number',req:true,ph:'Monthly income'},
-    ]
-  },
-  {
-    icon:'🥇', name:'Gold Loan', rate:'7% – 10% p.a.',
-    desc:'Unlock the value of your gold jewellery instantly. Quick disbursal with minimal paperwork and no income proof needed.',
-    facts:[
-      {lbl:'LTV Ratio',val:'Up to 75%',sub:'Of gold market value'},
-      {lbl:'Disbursal',val:'30 Minutes',sub:'After gold valuation'},
-      {lbl:'Min Purity',val:'18 Karat',sub:'Accepted gold purity'},
-    ],
-    tips:['No income proof required','Gold purity ≥ 18 karat accepted','Jewellery kept safe in bank vault','Bullet repayment option available'],
-    fields:[
-      {id:'fullName',  label:'Full Name',              type:'text',   req:true, ph:'As per Aadhaar'},
-      {id:'dob',       label:'Date of Birth',          type:'date',   req:true},
-      {id:'mobile',    label:'Mobile Number',          type:'tel',    req:true, ph:'10-digit'},
-      {id:'aadhaar',   label:'Aadhaar Number',         type:'text',   req:true, ph:'12-digit Aadhaar'},
-      {id:'pan',       label:'PAN Card Number',        type:'text',   req:false, ph:'If available'},
-      {id:'goldWt',    label:'Gold Weight (grams)',    type:'number', req:true, ph:'Approximate weight'},
-      {id:'goldKarat', label:'Gold Purity',            type:'select', req:true, options:['24 Karat','22 Karat','20 Karat','18 Karat']},
-      {id:'goldType',  label:'Gold Type',              type:'select', req:true, options:['Jewellery','Coins','Bars','Mixed']},
-      {id:'loanAmt',   label:'Loan Amount Required (₹)',type:'number',req:true, ph:'Based on gold value'},
-      {id:'tenure',    label:'Tenure',                 type:'select', req:true, options:['3 Months','6 Months','12 Months','18 Months','24 Months']},
-      {id:'repayMode', label:'Repayment Mode',         type:'select', req:true, options:['Monthly EMI','Bullet Payment (at end)','Interest Only Monthly']},
-    ]
-  },
-  {
-    icon:'📋', name:'LAP — Loan Against Property', rate:'10% – 14% p.a.',
-    desc:'Leverage your existing property to get large funds for business expansion, medical needs, or debt consolidation.',
-    facts:[
-      {lbl:'LTV Ratio',val:'Up to 65%',sub:'Of property market value'},
-      {lbl:'Max Amount',val:'₹10 Crore',sub:'Subject to property value'},
-      {lbl:'Tenure',val:'15 Years',sub:'Max repayment period'},
-    ],
-    tips:['Property must be free of legal disputes','Residential or commercial property accepted','CIBIL ≥ 700 recommended','Income proof mandatory'],
-    fields:[
-      {id:'fullName',  label:'Full Name',              type:'text',   req:true, ph:'Legal name'},
-      {id:'dob',       label:'Date of Birth',          type:'date',   req:true},
-      {id:'mobile',    label:'Mobile Number',          type:'tel',    req:true, ph:'10-digit'},
-      {id:'email',     label:'Email Address',          type:'email',  req:true, ph:'your@email.com'},
-      {id:'pan',       label:'PAN Card Number',        type:'text',   req:true, ph:'ABCDE1234F'},
-      {id:'aadhaar',   label:'Aadhaar Number',         type:'text',   req:true, ph:'12-digit'},
-      {id:'propType',  label:'Property Type',          type:'select', req:true, options:['Residential Flat','Independent House','Commercial Office','Shop','Land/Plot']},
-      {id:'propAddr',  label:'Property Address',       type:'text',   req:true, ph:'Complete address', cls:'full'},
-      {id:'propValue', label:'Property Market Value (₹)',type:'number',req:true,ph:'Current market value'},
-      {id:'loanAmt',   label:'Loan Amount Required (₹)',type:'number',req:true, ph:'Amount needed'},
-      {id:'tenure',    label:'Tenure (Years)',         type:'select', req:true, options:['1','2','3','5','7','10','12','15']},
-      {id:'income',    label:'Monthly Income (₹)',     type:'number', req:true, ph:'Net income'},
-      {id:'purpose',   label:'Loan Purpose',           type:'select', req:true, options:['Business Expansion','Medical','Debt Consolidation','Education','Travel','Other']},
-    ]
-  },
-  {
-    icon:'📊', name:'LAS — Loan Against Securities', rate:'9% – 13% p.a.',
-    desc:'Pledge your mutual funds, stocks, bonds or insurance policies to get instant liquidity without selling your investments.',
-    facts:[
-      {lbl:'LTV (Equity)',val:'Up to 50%',sub:'Of market value'},
-      {lbl:'LTV (MF/Debt)',val:'Up to 80%',sub:'Of NAV/market value'},
-      {lbl:'Min Amount',val:'₹1 Lakh',sub:'Minimum loan size'},
-    ],
-    tips:['Securities remain invested and earn returns','Overdraft facility available','Only approve-listed securities','Interest on amount drawn, not sanctioned'],
-    fields:[
-      {id:'fullName',  label:'Full Name',              type:'text',   req:true, ph:'As per Demat account'},
-      {id:'dob',       label:'Date of Birth',          type:'date',   req:true},
-      {id:'mobile',    label:'Mobile Number',          type:'tel',    req:true, ph:'10-digit'},
-      {id:'email',     label:'Email Address',          type:'email',  req:true, ph:'your@email.com'},
-      {id:'pan',       label:'PAN Card Number',        type:'text',   req:true, ph:'ABCDE1234F'},
-      {id:'dematId',   label:'Demat Account Number',   type:'text',   req:true, ph:'DP ID + Client ID'},
-      {id:'secType',   label:'Security Type',          type:'select', req:true, options:['Equity Shares','Mutual Funds','Government Bonds','Corporate Bonds','LIC Policy','PPF','Other']},
-      {id:'secValue',  label:'Total Securities Value (₹)',type:'number',req:true,ph:'Current market value'},
-      {id:'loanAmt',   label:'Loan Amount Required (₹)',type:'number',req:true, ph:'Up to 50–80% of value'},
-      {id:'tenure',    label:'Tenure',                 type:'select', req:true, options:['3 Months','6 Months','12 Months','Revolving OD']},
-    ]
-  },
-  {
-    icon:'🔄', name:'Overdraft Facility', rate:'12% – 16% p.a.',
-    desc:'A revolving credit line linked to your account. Withdraw as needed, pay interest only on what you use.',
-    facts:[
-      {lbl:'Limit',val:'Up to ₹25L',sub:'Based on income & history'},
-      {lbl:'Interest',val:'Daily Basis',sub:'Only on amount used'},
-      {lbl:'Renewal',val:'Annual',sub:'Review and renewal'},
-    ],
-    tips:['Maintain good account transaction history','Salary account preferred','CIBIL ≥ 720 for best limit','No prepayment penalty'],
-    fields:[
-      {id:'fullName',  label:'Full Name',              type:'text',   req:true, ph:'As per Aadhaar'},
-      {id:'dob',       label:'Date of Birth',          type:'date',   req:true},
-      {id:'mobile',    label:'Mobile Number',          type:'tel',    req:true, ph:'10-digit'},
-      {id:'email',     label:'Email Address',          type:'email',  req:true, ph:'your@email.com'},
-      {id:'pan',       label:'PAN Card Number',        type:'text',   req:true, ph:'ABCDE1234F'},
-      {id:'accNo',     label:'Savings Account Number', type:'text',   req:true, ph:'Your bank account number'},
-      {id:'empType',   label:'Employment Type',        type:'select', req:true, options:['Salaried','Self-Employed','Business Owner']},
-      {id:'income',    label:'Monthly Income (₹)',     type:'number', req:true, ph:'Net income'},
-      {id:'odLimit',   label:'OD Limit Required (₹)', type:'number', req:true, ph:'Amount of credit line'},
-      {id:'purpose',   label:'Primary Purpose',        type:'select', req:true, options:['Business Cash Flow','Emergency Fund','Salary Advance','Other']},
-    ]
-  },
-];
+    /* ══════════════════════════════════════════
+       LOAN DEFINITIONS
+       Each loan has: icon, name, rate, desc,
+       facts[], tips[], fields[]
+       fields: { id, label, type, required, options?, placeholder? }
+    ══════════════════════════════════════════ */
+    const LOANS = [
+      {
+        icon: '🏠', name: 'Home Loan', rate: '9.5% – 11.5% p.a.',
+        desc: 'Fulfil your dream of owning a home with our competitive interest rates and flexible repayment options.',
+        facts: [
+          { lbl: 'Max Amount', val: '₹5 Crore', sub: 'Up to 90% of property value' },
+          { lbl: 'Tenure', val: '30 Years', sub: 'Flexible repayment period' },
+          { lbl: 'Processing Fee', val: '0.5%', sub: 'Of loan amount, min ₹10,000' },
+        ],
+        tips: ['CIBIL score ≥ 750 for best rates', 'Property must be legally approved', 'Minimum income ₹25,000/month', 'LTV ratio max 90%'],
+        fields: [
+          { id: 'fullName', label: 'Full Name', type: 'text', req: true, ph: 'As per Aadhaar' },
+          { id: 'dob', label: 'Date of Birth', type: 'date', req: true },
+          { id: 'mobile', label: 'Mobile Number', type: 'tel', req: true, ph: '10-digit number' },
+          { id: 'email', label: 'Email Address', type: 'email', req: true, ph: 'your@email.com' },
+          { id: 'pan', label: 'PAN Card Number', type: 'text', req: true, ph: 'ABCDE1234F' },
+          { id: 'aadhaar', label: 'Aadhaar Number', type: 'text', req: true, ph: '12-digit Aadhaar' },
+          { id: 'empType', label: 'Employment Type', type: 'select', req: true, options: ['Salaried', 'Self-Employed', 'Business Owner'] },
+          { id: 'income', label: 'Monthly Income (₹)', type: 'number', req: true, ph: 'e.g. 75000' },
+          { id: 'loanAmt', label: 'Loan Amount Required (₹)', type: 'number', req: true, ph: 'e.g. 5000000' },
+          { id: 'tenure', label: 'Loan Tenure (Years)', type: 'select', req: true, options: ['5', '10', '15', '20', '25', '30'] },
+          { id: 'propAddr', label: 'Property Address', type: 'text', req: true, ph: 'Complete address of property', cls: 'full' },
+          { id: 'propType', label: 'Property Type', type: 'select', req: true, options: ['Apartment', 'Independent House', 'Villa', 'Plot'] },
+          { id: 'propVal', label: 'Property Value (₹)', type: 'number', req: true, ph: 'Estimated market value' },
+          { id: 'existLoan', label: 'Any Existing Loans?', type: 'select', req: false, options: ['No', 'Yes — Home', 'Yes — Personal', 'Yes — Vehicle', 'Yes — Other'] },
+        ]
+      },
+      {
+        icon: '💰', name: 'Personal Loan', rate: '10% – 24% p.a.',
+        desc: 'Quick funds for any personal need — medical, travel, wedding, or home renovation — with minimal documentation.',
+        facts: [
+          { lbl: 'Max Amount', val: '₹40 Lakh', sub: 'No collateral required' },
+          { lbl: 'Tenure', val: '1–5 Years', sub: 'Flexible repayment' },
+          { lbl: 'Disbursal', val: '24–48 hrs', sub: 'Fast track processing' },
+        ],
+        tips: ['CIBIL score ≥ 700 recommended', 'Stable income for 6+ months', 'Low existing EMI obligations', 'Salaried preferred for lower rates'],
+        fields: [
+          { id: 'fullName', label: 'Full Name', type: 'text', req: true, ph: 'As per Aadhaar' },
+          { id: 'dob', label: 'Date of Birth', type: 'date', req: true },
+          { id: 'mobile', label: 'Mobile Number', type: 'tel', req: true, ph: '10-digit number' },
+          { id: 'email', label: 'Email Address', type: 'email', req: true, ph: 'your@email.com' },
+          { id: 'pan', label: 'PAN Card Number', type: 'text', req: true, ph: 'ABCDE1234F' },
+          { id: 'empType', label: 'Employment Type', type: 'select', req: true, options: ['Salaried', 'Self-Employed', 'Freelancer', 'Business Owner'] },
+          { id: 'employer', label: 'Employer / Company Name', type: 'text', req: true, ph: 'Current employer' },
+          { id: 'income', label: 'Monthly Income (₹)', type: 'number', req: true, ph: 'Net take-home salary' },
+          { id: 'loanAmt', label: 'Loan Amount Required (₹)', type: 'number', req: true, ph: 'Max ₹40,00,000' },
+          { id: 'tenure', label: 'Tenure (Months)', type: 'select', req: true, options: ['12', '24', '36', '48', '60'] },
+          { id: 'purpose', label: 'Loan Purpose', type: 'select', req: true, options: ['Medical Emergency', 'Travel', 'Wedding', 'Home Renovation', 'Education', 'Debt Consolidation', 'Other'] },
+          { id: 'existEmi', label: 'Current Monthly EMI (₹)', type: 'number', req: false, ph: '0 if none' },
+        ]
+      },
+      {
+        icon: '🚗', name: 'Vehicle Loan', rate: '7.5% – 13% p.a.',
+        desc: 'Drive home your dream vehicle with our easy financing options for new and used cars, bikes, and commercial vehicles.',
+        facts: [
+          { lbl: 'Max Amount', val: '₹1.5 Crore', sub: 'Up to 100% on-road price' },
+          { lbl: 'Tenure', val: '7 Years', sub: 'Max repayment period' },
+          { lbl: 'Down Payment', val: '0%', sub: 'On select new vehicles' },
+        ],
+        tips: ['CIBIL ≥ 700 for 0% down payment', 'New vehicle: 100% financing available', 'Used vehicle: max 85% value', 'Valid driving licence required'],
+        fields: [
+          { id: 'fullName', label: 'Full Name', type: 'text', req: true, ph: 'As per driving licence' },
+          { id: 'dob', label: 'Date of Birth', type: 'date', req: true },
+          { id: 'mobile', label: 'Mobile Number', type: 'tel', req: true, ph: '10-digit number' },
+          { id: 'email', label: 'Email Address', type: 'email', req: true, ph: 'your@email.com' },
+          { id: 'pan', label: 'PAN Card Number', type: 'text', req: true, ph: 'ABCDE1234F' },
+          { id: 'dlNumber', label: 'Driving Licence Number', type: 'text', req: true, ph: 'DL number' },
+          { id: 'vehType', label: 'Vehicle Type', type: 'select', req: true, options: ['New Car', 'Used Car', 'New Bike', 'Used Bike', 'Commercial Vehicle', 'Electric Vehicle'] },
+          { id: 'vehBrand', label: 'Vehicle Brand & Model', type: 'text', req: true, ph: 'e.g. Maruti Swift ZXi' },
+          { id: 'onRoadPx', label: 'On-Road Price (₹)', type: 'number', req: true, ph: 'Dealer quote price' },
+          { id: 'loanAmt', label: 'Loan Amount (₹)', type: 'number', req: true, ph: 'Amount you need' },
+          { id: 'tenure', label: 'Tenure (Months)', type: 'select', req: true, options: ['12', '24', '36', '48', '60', '72', '84'] },
+          { id: 'income', label: 'Monthly Income (₹)', type: 'number', req: true, ph: 'Net income' },
+        ]
+      },
+      {
+        icon: '🏢', name: 'Business Loan', rate: '11% – 18% p.a.',
+        desc: 'Fuel your business growth with working capital, machinery financing, or expansion loans tailored to your needs.',
+        facts: [
+          { lbl: 'Max Amount', val: '₹2 Crore', sub: 'Collateral-free options available' },
+          { lbl: 'Tenure', val: '5 Years', sub: 'Max repayment period' },
+          { lbl: 'GST Required', val: '3 Years', sub: 'Minimum business vintage' },
+        ],
+        tips: ['Business operational for ≥ 3 years', 'GST registration mandatory', 'Profit-making for last 2 years', 'Business bank statements required'],
+        fields: [
+          { id: 'ownerName', label: 'Owner / Proprietor Name', type: 'text', req: true, ph: 'Full legal name' },
+          { id: 'mobile', label: 'Mobile Number', type: 'tel', req: true, ph: '10-digit' },
+          { id: 'email', label: 'Email Address', type: 'email', req: true, ph: 'business@email.com' },
+          { id: 'pan', label: 'PAN (Business/Personal)', type: 'text', req: true, ph: 'PAN number' },
+          { id: 'bizName', label: 'Business Name', type: 'text', req: true, ph: 'Registered business name' },
+          { id: 'bizType', label: 'Business Type', type: 'select', req: true, options: ['Proprietorship', 'Partnership', 'Pvt Ltd', 'LLP', 'Public Ltd'] },
+          { id: 'gst', label: 'GST Number', type: 'text', req: true, ph: '15-digit GSTIN' },
+          { id: 'vintage', label: 'Business Vintage (Years)', type: 'number', req: true, ph: 'Years in operation' },
+          { id: 'turnover', label: 'Annual Turnover (₹)', type: 'number', req: true, ph: 'Last FY turnover' },
+          { id: 'loanAmt', label: 'Loan Amount Required (₹)', type: 'number', req: true, ph: 'Amount needed' },
+          { id: 'loanPurpose', label: 'Loan Purpose', type: 'select', req: true, options: ['Working Capital', 'Equipment Purchase', 'Expansion', 'Inventory', 'Debt Refinancing', 'Other'] },
+          { id: 'tenure', label: 'Tenure (Months)', type: 'select', req: true, options: ['12', '24', '36', '48', '60'] },
+        ]
+      },
+      {
+        icon: '🎓', name: 'Education Loan', rate: '8% – 12% p.a.',
+        desc: 'Invest in your future. Finance your higher education at top institutions in India or abroad with easy repayment after placement.',
+        facts: [
+          { lbl: 'Max Amount', val: '₹1.5 Crore', sub: 'Abroad; ₹75L for India' },
+          { lbl: 'Moratorium', val: 'Course + 1yr', sub: 'Repayment starts after job' },
+          { lbl: 'Tax Benefit', val: 'Section 80E', sub: 'Full interest deduction' },
+        ],
+        tips: ['Admission letter from institution required', 'Parent/guardian as co-applicant', 'Collateral required above ₹7.5L', 'No processing fee for meritorious students'],
+        fields: [
+          { id: 'stuName', label: 'Student Full Name', type: 'text', req: true, ph: 'As per 10th certificate' },
+          { id: 'dob', label: 'Date of Birth', type: 'date', req: true },
+          { id: 'mobile', label: 'Mobile Number', type: 'tel', req: true, ph: '10-digit' },
+          { id: 'email', label: 'Email Address', type: 'email', req: true, ph: 'your@email.com' },
+          { id: 'pan', label: 'Student PAN', type: 'text', req: false, ph: 'If available' },
+          { id: 'aadhaar', label: 'Aadhaar Number', type: 'text', req: true, ph: '12-digit' },
+          { id: 'course', label: 'Course Name', type: 'text', req: true, ph: 'e.g. B.Tech CSE / MBA Finance' },
+          { id: 'institute', label: 'Institution Name', type: 'text', req: true, ph: 'College/University name' },
+          { id: 'country', label: 'Study Location', type: 'select', req: true, options: ['India', 'USA', 'UK', 'Canada', 'Australia', 'Germany', 'Other'] },
+          { id: 'duration', label: 'Course Duration (Years)', type: 'select', req: true, options: ['1', '2', '3', '4', '5'] },
+          { id: 'totalFee', label: 'Total Course Fees (₹)', type: 'number', req: true, ph: 'All-inclusive fee' },
+          { id: 'loanAmt', label: 'Loan Amount Required (₹)', type: 'number', req: true, ph: 'Amount needed' },
+          { id: 'coApplicant', label: 'Co-Applicant Name', type: 'text', req: true, ph: 'Parent/Guardian name' },
+          { id: 'coIncome', label: 'Co-Applicant Income (₹/month)', type: 'number', req: true, ph: 'Monthly income' },
+        ]
+      },
+      {
+        icon: '🥇', name: 'Gold Loan', rate: '7% – 10% p.a.',
+        desc: 'Unlock the value of your gold jewellery instantly. Quick disbursal with minimal paperwork and no income proof needed.',
+        facts: [
+          { lbl: 'LTV Ratio', val: 'Up to 75%', sub: 'Of gold market value' },
+          { lbl: 'Disbursal', val: '30 Minutes', sub: 'After gold valuation' },
+          { lbl: 'Min Purity', val: '18 Karat', sub: 'Accepted gold purity' },
+        ],
+        tips: ['No income proof required', 'Gold purity ≥ 18 karat accepted', 'Jewellery kept safe in bank vault', 'Bullet repayment option available'],
+        fields: [
+          { id: 'fullName', label: 'Full Name', type: 'text', req: true, ph: 'As per Aadhaar' },
+          { id: 'dob', label: 'Date of Birth', type: 'date', req: true },
+          { id: 'mobile', label: 'Mobile Number', type: 'tel', req: true, ph: '10-digit' },
+          { id: 'aadhaar', label: 'Aadhaar Number', type: 'text', req: true, ph: '12-digit Aadhaar' },
+          { id: 'pan', label: 'PAN Card Number', type: 'text', req: false, ph: 'If available' },
+          { id: 'goldWt', label: 'Gold Weight (grams)', type: 'number', req: true, ph: 'Approximate weight' },
+          { id: 'goldKarat', label: 'Gold Purity', type: 'select', req: true, options: ['24 Karat', '22 Karat', '20 Karat', '18 Karat'] },
+          { id: 'goldType', label: 'Gold Type', type: 'select', req: true, options: ['Jewellery', 'Coins', 'Bars', 'Mixed'] },
+          { id: 'loanAmt', label: 'Loan Amount Required (₹)', type: 'number', req: true, ph: 'Based on gold value' },
+          { id: 'tenure', label: 'Tenure', type: 'select', req: true, options: ['3 Months', '6 Months', '12 Months', '18 Months', '24 Months'] },
+          { id: 'repayMode', label: 'Repayment Mode', type: 'select', req: true, options: ['Monthly EMI', 'Bullet Payment (at end)', 'Interest Only Monthly'] },
+        ]
+      },
+      {
+        icon: '📋', name: 'LAP — Loan Against Property', rate: '10% – 14% p.a.',
+        desc: 'Leverage your existing property to get large funds for business expansion, medical needs, or debt consolidation.',
+        facts: [
+          { lbl: 'LTV Ratio', val: 'Up to 65%', sub: 'Of property market value' },
+          { lbl: 'Max Amount', val: '₹10 Crore', sub: 'Subject to property value' },
+          { lbl: 'Tenure', val: '15 Years', sub: 'Max repayment period' },
+        ],
+        tips: ['Property must be free of legal disputes', 'Residential or commercial property accepted', 'CIBIL ≥ 700 recommended', 'Income proof mandatory'],
+        fields: [
+          { id: 'fullName', label: 'Full Name', type: 'text', req: true, ph: 'Legal name' },
+          { id: 'dob', label: 'Date of Birth', type: 'date', req: true },
+          { id: 'mobile', label: 'Mobile Number', type: 'tel', req: true, ph: '10-digit' },
+          { id: 'email', label: 'Email Address', type: 'email', req: true, ph: 'your@email.com' },
+          { id: 'pan', label: 'PAN Card Number', type: 'text', req: true, ph: 'ABCDE1234F' },
+          { id: 'aadhaar', label: 'Aadhaar Number', type: 'text', req: true, ph: '12-digit' },
+          { id: 'propType', label: 'Property Type', type: 'select', req: true, options: ['Residential Flat', 'Independent House', 'Commercial Office', 'Shop', 'Land/Plot'] },
+          { id: 'propAddr', label: 'Property Address', type: 'text', req: true, ph: 'Complete address', cls: 'full' },
+          { id: 'propValue', label: 'Property Market Value (₹)', type: 'number', req: true, ph: 'Current market value' },
+          { id: 'loanAmt', label: 'Loan Amount Required (₹)', type: 'number', req: true, ph: 'Amount needed' },
+          { id: 'tenure', label: 'Tenure (Years)', type: 'select', req: true, options: ['1', '2', '3', '5', '7', '10', '12', '15'] },
+          { id: 'income', label: 'Monthly Income (₹)', type: 'number', req: true, ph: 'Net income' },
+          { id: 'purpose', label: 'Loan Purpose', type: 'select', req: true, options: ['Business Expansion', 'Medical', 'Debt Consolidation', 'Education', 'Travel', 'Other'] },
+        ]
+      },
+      {
+        icon: '📊', name: 'LAS — Loan Against Securities', rate: '9% – 13% p.a.',
+        desc: 'Pledge your mutual funds, stocks, bonds or insurance policies to get instant liquidity without selling your investments.',
+        facts: [
+          { lbl: 'LTV (Equity)', val: 'Up to 50%', sub: 'Of market value' },
+          { lbl: 'LTV (MF/Debt)', val: 'Up to 80%', sub: 'Of NAV/market value' },
+          { lbl: 'Min Amount', val: '₹1 Lakh', sub: 'Minimum loan size' },
+        ],
+        tips: ['Securities remain invested and earn returns', 'Overdraft facility available', 'Only approve-listed securities', 'Interest on amount drawn, not sanctioned'],
+        fields: [
+          { id: 'fullName', label: 'Full Name', type: 'text', req: true, ph: 'As per Demat account' },
+          { id: 'dob', label: 'Date of Birth', type: 'date', req: true },
+          { id: 'mobile', label: 'Mobile Number', type: 'tel', req: true, ph: '10-digit' },
+          { id: 'email', label: 'Email Address', type: 'email', req: true, ph: 'your@email.com' },
+          { id: 'pan', label: 'PAN Card Number', type: 'text', req: true, ph: 'ABCDE1234F' },
+          { id: 'dematId', label: 'Demat Account Number', type: 'text', req: true, ph: 'DP ID + Client ID' },
+          { id: 'secType', label: 'Security Type', type: 'select', req: true, options: ['Equity Shares', 'Mutual Funds', 'Government Bonds', 'Corporate Bonds', 'LIC Policy', 'PPF', 'Other'] },
+          { id: 'secValue', label: 'Total Securities Value (₹)', type: 'number', req: true, ph: 'Current market value' },
+          { id: 'loanAmt', label: 'Loan Amount Required (₹)', type: 'number', req: true, ph: 'Up to 50–80% of value' },
+          { id: 'tenure', label: 'Tenure', type: 'select', req: true, options: ['3 Months', '6 Months', '12 Months', 'Revolving OD'] },
+        ]
+      },
+      {
+        icon: '🔄', name: 'Overdraft Facility', rate: '12% – 16% p.a.',
+        desc: 'A revolving credit line linked to your account. Withdraw as needed, pay interest only on what you use.',
+        facts: [
+          { lbl: 'Limit', val: 'Up to ₹25L', sub: 'Based on income & history' },
+          { lbl: 'Interest', val: 'Daily Basis', sub: 'Only on amount used' },
+          { lbl: 'Renewal', val: 'Annual', sub: 'Review and renewal' },
+        ],
+        tips: ['Maintain good account transaction history', 'Salary account preferred', 'CIBIL ≥ 720 for best limit', 'No prepayment penalty'],
+        fields: [
+          { id: 'fullName', label: 'Full Name', type: 'text', req: true, ph: 'As per Aadhaar' },
+          { id: 'dob', label: 'Date of Birth', type: 'date', req: true },
+          { id: 'mobile', label: 'Mobile Number', type: 'tel', req: true, ph: '10-digit' },
+          { id: 'email', label: 'Email Address', type: 'email', req: true, ph: 'your@email.com' },
+          { id: 'pan', label: 'PAN Card Number', type: 'text', req: true, ph: 'ABCDE1234F' },
+          { id: 'accNo', label: 'Savings Account Number', type: 'text', req: true, ph: 'Your bank account number' },
+          { id: 'empType', label: 'Employment Type', type: 'select', req: true, options: ['Salaried', 'Self-Employed', 'Business Owner'] },
+          { id: 'income', label: 'Monthly Income (₹)', type: 'number', req: true, ph: 'Net income' },
+          { id: 'odLimit', label: 'OD Limit Required (₹)', type: 'number', req: true, ph: 'Amount of credit line' },
+          { id: 'purpose', label: 'Primary Purpose', type: 'select', req: true, options: ['Business Cash Flow', 'Emergency Fund', 'Salary Advance', 'Other'] },
+        ]
+      },
+    ];
 
-/* ══════════════════════════════════════════
-   STATE
-══════════════════════════════════════════ */
-const S = {
-  user: null, balance: 0, txns: [], dep: 0, wit: 0,
-  cibilScore: 0,
-};
+    /* ══════════════════════════════════════════
+       STATE
+    ══════════════════════════════════════════ */
+    const S = {
+      user: null, balance: 0, txns: [], dep: 0, wit: 0,
+      cibilScore: 0,
+    };
 
-function sessKey(id){ return 'nxbk_' + id.toLowerCase(); }
-function saveSess(){
-  localStorage.setItem(sessKey(S.user.id), JSON.stringify({balance:S.balance,txns:S.txns,dep:S.dep,wit:S.wit}));
-}
-function loadSess(id){
-  const d = JSON.parse(localStorage.getItem(sessKey(id)) || '{}');
-  S.balance = d.balance||0; S.txns = d.txns||[]; S.dep = d.dep||0; S.wit = d.wit||0;
-}
+    function sessKey(id) { return 'nxbk_' + id.toLowerCase(); }
+    function saveSess() {
+      localStorage.setItem(sessKey(S.user.id), JSON.stringify({ balance: S.balance, txns: S.txns, dep: S.dep, wit: S.wit }));
+    }
+    function loadSess(id) {
+      const d = JSON.parse(localStorage.getItem(sessKey(id)) || '{}');
+      S.balance = d.balance || 0; S.txns = d.txns || []; S.dep = d.dep || 0; S.wit = d.wit || 0;
+    }
 
-/* ══════════════════════════════════════════
-   AUTH
-══════════════════════════════════════════ */
-function show(on, off){
-  document.getElementById(on).classList.remove('hidden');
-  document.getElementById(off).classList.add('hidden');
-}
+    /* ══════════════════════════════════════════
+       AUTH
+    ══════════════════════════════════════════ */
+    function show(on, off) {
+      document.getElementById(on).classList.remove('hidden');
+      document.getElementById(off).classList.add('hidden');
+    }
 
-async function doLogin(){
-  const name = v('lName'), id = v('lId');
-  if(!name || !id){ setAlert('loginAlert','Fill in all fields.','err'); return; }
-  setBtn('loginBtn','Checking…', true);
-  try {
-    const r = await fetch(API+'/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,customerId:id})});
-    const d = await r.json();
-    if(d.success){ S.user={name:d.name,id:d.customerId}; loadSess(d.customerId); boot(); }
-    else setAlert('loginAlert', d.message || 'Invalid credentials.', 'err');
-  } catch(e){ setAlert('loginAlert','⚠ Cannot reach server. Start BankingServer.java on port 8081.','err'); }
-  finally { setBtn('loginBtn','Login', false); }
-}
+    async function doLogin() {
+      const name = v('lName'), id = v('lId');
+      if (!name || !id) { setAlert('loginAlert', 'Fill in all fields.', 'err'); return; }
+      setBtn('loginBtn', 'Checking…', true);
+      try {
+        const r = await fetch(API + '/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, customerId: id }) });
+        const d = await r.json();
+        if (d.success) { S.user = { name: d.name, id: d.customerId }; loadSess(d.customerId); boot(); }
+        else setAlert('loginAlert', d.message || 'Invalid credentials.', 'err');
+      } catch (e) { setAlert('loginAlert', '⚠ Cannot reach server. Start BankingServer.java on port 8081.', 'err'); }
+      finally { setBtn('loginBtn', 'Login', false); }
+    }
 
-async function doRegister(){
-  const name = v('rName'), id = v('rId');
-  if(!name || !id){ setAlert('regAlert','Fill in all fields.','err'); return; }
-  if(id.length < 4){ setAlert('regAlert','Customer ID min 4 characters.','err'); return; }
-  setBtn('regBtn','Creating…', true);
-  try {
-    const r = await fetch(API+'/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,customerId:id})});
-    const d = await r.json();
-    if(d.success){
-      S.user={name:d.name,id:d.customerId}; S.balance=0; S.txns=[]; S.dep=0; S.wit=0;
-      setAlert('regAlert','✅ Account created! Redirecting…','ok');
-      setTimeout(boot, 700);
-    } else setAlert('regAlert', d.message||'Registration failed.','err');
-  } catch(e){ setAlert('regAlert','⚠ Cannot reach server. Start BankingServer.java on port 8081.','err'); }
-  finally { setBtn('regBtn','Create Account', false); }
-}
+    async function doRegister() {
+      const name = v('rName'), id = v('rId');
+      if (!name || !id) { setAlert('regAlert', 'Fill in all fields.', 'err'); return; }
+      if (id.length < 4) { setAlert('regAlert', 'Customer ID min 4 characters.', 'err'); return; }
+      setBtn('regBtn', 'Creating…', true);
+      try {
+        const r = await fetch(API + '/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, customerId: id }) });
+        const d = await r.json();
+        if (d.success) {
+          S.user = { name: d.name, id: d.customerId }; S.balance = 0; S.txns = []; S.dep = 0; S.wit = 0;
+          setAlert('regAlert', '✅ Account created! Redirecting…', 'ok');
+          setTimeout(boot, 700);
+        } else setAlert('regAlert', d.message || 'Registration failed.', 'err');
+      } catch (e) { setAlert('regAlert', '⚠ Cannot reach server. Start BankingServer.java on port 8081.', 'err'); }
+      finally { setBtn('regBtn', 'Create Account', false); }
+    }
 
-function doLogout(){
-  saveSess(); S.user=null;
-  document.getElementById('dashboard').classList.add('hidden');
-  document.getElementById('authPage').classList.remove('hidden');
-  document.getElementById('lName').value='';
-  document.getElementById('lId').value='';
-  document.getElementById('loginAlert').className='hidden';
-  show('loginCard','registerCard');
-}
+    function doLogout() {
+      saveSess(); S.user = null;
+      document.getElementById('dashboard').classList.add('hidden');
+      document.getElementById('authPage').classList.remove('hidden');
+      document.getElementById('lName').value = '';
+      document.getElementById('lId').value = '';
+      document.getElementById('loginAlert').className = 'hidden';
+      show('loginCard', 'registerCard');
+    }
 
-/* ══════════════════════════════════════════
-   BOOT / NAVIGATION
-══════════════════════════════════════════ */
-function boot(){
-  document.getElementById('authPage').classList.add('hidden');
-  document.getElementById('dashboard').classList.remove('hidden');
-  const u = S.user;
-  const masked = '****' + u.id.slice(-2).toUpperCase();
-  document.getElementById('sbName').textContent = u.name;
-  document.getElementById('sbId').textContent   = 'ID: ' + masked;
-  document.getElementById('welcomeMsg').textContent = 'Welcome, ' + u.name.split(' ')[0] + '!';
-  document.getElementById('balId').textContent = 'ID: ' + masked;
-  document.getElementById('pAvatar').textContent = u.name.charAt(0).toUpperCase();
-  document.getElementById('pName').textContent   = u.name;
-  document.getElementById('pIdLine').textContent = 'Customer ID: ' + masked;
-  document.getElementById('ptName').textContent  = u.name;
-  document.getElementById('ptId').textContent    = masked;
-  buildLoanGrid();
-  refreshUI();
-  navTo('overview', document.querySelector('[data-p="overview"]'));
-}
+    /* ══════════════════════════════════════════
+       BOOT / NAVIGATION
+    ══════════════════════════════════════════ */
+    function boot() {
+      document.getElementById('authPage').classList.add('hidden');
+      document.getElementById('dashboard').classList.remove('hidden');
+      const u = S.user;
+      const masked = '****' + u.id.slice(-2).toUpperCase();
+      document.getElementById('sbName').textContent = u.name;
+      document.getElementById('sbId').textContent = 'ID: ' + masked;
+      document.getElementById('welcomeMsg').textContent = 'Welcome, ' + u.name.split(' ')[0] + '!';
+      document.getElementById('balId').textContent = 'ID: ' + masked;
+      document.getElementById('pAvatar').textContent = u.name.charAt(0).toUpperCase();
+      document.getElementById('pName').textContent = u.name;
+      document.getElementById('pIdLine').textContent = 'Customer ID: ' + masked;
+      document.getElementById('ptName').textContent = u.name;
+      document.getElementById('ptId').textContent = masked;
+      buildLoanGrid();
+      refreshUI();
+      navTo('overview', document.querySelector('[data-p="overview"]'));
+    }
 
-function navTo(page, btn){
-  document.querySelectorAll('.pv').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nv').forEach(n=>n.classList.remove('active'));
-  document.getElementById('pv-'+page).classList.add('active');
-  if(btn) btn.classList.add('active');
-  // mark sidebar button for loans pages
-  if(page==='loanDetail'){
-    document.querySelector('[data-p="loans"]').classList.add('active');
-  }
-}
+    function navTo(page, btn) {
+      document.querySelectorAll('.pv').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nv').forEach(n => n.classList.remove('active'));
+      document.getElementById('pv-' + page).classList.add('active');
+      if (btn) btn.classList.add('active');
+      // mark sidebar button for loans pages
+      if (page === 'loanDetail') {
+        document.querySelector('[data-p="loans"]').classList.add('active');
+      }
+    }
 
-/* ══════════════════════════════════════════
-   UI REFRESH
-══════════════════════════════════════════ */
-function refreshUI(){
-  document.getElementById('balVal').textContent  = fmt(S.balance);
-  document.getElementById('statDep').textContent = fmt(S.dep);
-  document.getElementById('statWit').textContent = fmt(S.wit);
-  document.getElementById('statTxn').textContent = S.txns.length;
-  document.getElementById('ptBal').textContent   = fmt(S.balance);
-  renderTxns();
-}
+    /* ══════════════════════════════════════════
+       UI REFRESH
+    ══════════════════════════════════════════ */
+    function refreshUI() {
+      document.getElementById('balVal').textContent = fmt(S.balance);
+      document.getElementById('statDep').textContent = fmt(S.dep);
+      document.getElementById('statWit').textContent = fmt(S.wit);
+      document.getElementById('statTxn').textContent = S.txns.length;
+      document.getElementById('ptBal').textContent = fmt(S.balance);
+      renderTxns();
+    }
 
-function renderTxns(){
-  const txns = S.txns;
-  const makeRow = t => `
+    function renderTxns() {
+      const txns = S.txns;
+      const makeRow = t => `
     <div class="txn">
       <div class="txn-dot ${t.type}">
-        ${t.type==='d'
+        ${t.type === 'd'
           ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>'
           : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>'}
       </div>
       <div class="txn-inf">
-        <div class="txn-lbl">${t.type==='d'?'Deposit':'Withdrawal'}</div>
+        <div class="txn-lbl">${t.type === 'd' ? 'Deposit' : 'Withdrawal'}</div>
         <div class="txn-time">${t.time}</div>
       </div>
-      <div class="txn-amt ${t.type}">${t.type==='d'?'+':'-'}${fmt(t.amt)}</div>
+      <div class="txn-amt ${t.type}">${t.type === 'd' ? '+' : '-'}${fmt(t.amt)}</div>
     </div>`;
-  const rev = [...txns].reverse();
-  document.getElementById('recentList').innerHTML   = rev.length ? rev.slice(0,5).map(makeRow).join('') : '<div class="empty-msg">No transactions yet</div>';
-  document.getElementById('allTxnList').innerHTML   = rev.length ? rev.map(makeRow).join('')           : '<div class="empty-msg">No transactions yet</div>';
-}
+      const rev = [...txns].reverse();
+      document.getElementById('recentList').innerHTML = rev.length ? rev.slice(0, 5).map(makeRow).join('') : '<div class="empty-msg">No transactions yet</div>';
+      document.getElementById('allTxnList').innerHTML = rev.length ? rev.map(makeRow).join('') : '<div class="empty-msg">No transactions yet</div>';
+    }
 
-/* ══════════════════════════════════════════
-   TRANSACTIONS
-══════════════════════════════════════════ */
-function doDeposit(){
-  const amt = parseFloat(document.getElementById('depAmt').value);
-  if(!amt||amt<=0){ toast('Enter a valid amount','err'); return; }
-  openModal('💰 Confirm Deposit','You are about to deposit into your account.',
-    [{l:'Amount',v:fmt(amt)},{l:'Current Balance',v:fmt(S.balance)},{l:'New Balance',v:fmt(S.balance+amt)}],
-    ()=>{
-      S.balance+=amt; S.dep+=amt;
-      S.txns.push({type:'d',amt,time:now()});
-      document.getElementById('depAmt').value='';
-      saveSess(); refreshUI();
-      toast('✅ '+fmt(amt)+' deposited!','ok');
-    });
-}
+    /* ══════════════════════════════════════════
+       TRANSACTIONS
+    ══════════════════════════════════════════ */
+    function doDeposit() {
+      const amt = parseFloat(document.getElementById('depAmt').value);
+      if (!amt || amt <= 0) { toast('Enter a valid amount', 'err'); return; }
+      openModal('💰 Confirm Deposit', 'You are about to deposit into your account.',
+        [{ l: 'Amount', v: fmt(amt) }, { l: 'Current Balance', v: fmt(S.balance) }, { l: 'New Balance', v: fmt(S.balance + amt) }],
+        () => {
+          S.balance += amt; S.dep += amt;
+          S.txns.push({ type: 'd', amt, time: now() });
+          document.getElementById('depAmt').value = '';
+          saveSess(); refreshUI();
+          toast('✅ ' + fmt(amt) + ' deposited!', 'ok');
+        });
+    }
 
-function doWithdraw(){
-  const amt = parseFloat(document.getElementById('witAmt').value);
-  if(!amt||amt<=0){ toast('Enter a valid amount','err'); return; }
-  if(amt>S.balance){ toast('❌ Insufficient balance','err'); return; }
-  openModal('🏧 Confirm Withdrawal','You are about to withdraw from your account.',
-    [{l:'Amount',v:fmt(amt)},{l:'Current Balance',v:fmt(S.balance)},{l:'Remaining',v:fmt(S.balance-amt)}],
-    ()=>{
-      S.balance-=amt; S.wit+=amt;
-      S.txns.push({type:'w',amt,time:now()});
-      document.getElementById('witAmt').value='';
-      saveSess(); refreshUI();
-      toast('✅ '+fmt(amt)+' withdrawn!','ok');
-    });
-}
+    function doWithdraw() {
+      const amt = parseFloat(document.getElementById('witAmt').value);
+      if (!amt || amt <= 0) { toast('Enter a valid amount', 'err'); return; }
+      if (amt > S.balance) { toast('❌ Insufficient balance', 'err'); return; }
+      openModal('🏧 Confirm Withdrawal', 'You are about to withdraw from your account.',
+        [{ l: 'Amount', v: fmt(amt) }, { l: 'Current Balance', v: fmt(S.balance) }, { l: 'Remaining', v: fmt(S.balance - amt) }],
+        () => {
+          S.balance -= amt; S.wit += amt;
+          S.txns.push({ type: 'w', amt, time: now() });
+          document.getElementById('witAmt').value = '';
+          saveSess(); refreshUI();
+          toast('✅ ' + fmt(amt) + ' withdrawn!', 'ok');
+        });
+    }
 
-/* ══════════════════════════════════════════
-   LOAN GRID
-══════════════════════════════════════════ */
-function buildLoanGrid(){
-  document.getElementById('loanGrid').innerHTML = LOANS.map((l,i)=>`
+    /* ══════════════════════════════════════════
+       LOAN GRID
+    ══════════════════════════════════════════ */
+    function buildLoanGrid() {
+      document.getElementById('loanGrid').innerHTML = LOANS.map((l, i) => `
     <div class="loan-card" onclick="openLoanDetail(${i})">
       <div class="l-icon">${l.icon}</div>
       <div class="l-name">${l.name}</div>
@@ -1036,141 +2145,142 @@ function buildLoanGrid(){
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
       </div>
     </div>`).join('');
-}
+    }
 
-function checkCibil(){
-  const score = parseInt(document.getElementById('cibilInp').value);
-  const badge = document.getElementById('cibilBadge');
-  const sec   = document.getElementById('loanGridSection');
-  if(!score||score<300||score>900){ toast('Enter a valid score (300–900)','err'); return; }
-  S.cibilScore = score;
-  if(score >= 650){
-    badge.className='badge ok'; badge.textContent='✓ Eligible';
-    sec.classList.remove('hidden');
-    toast('✅ You are eligible! Choose a loan type below.','ok');
-  } else {
-    badge.className='badge no'; badge.textContent='✗ Not Eligible';
-    sec.classList.add('hidden');
-    toast('❌ Score too low. Min 650 required.','err');
-  }
-}
+    function checkCibil() {
+      const score = parseInt(document.getElementById('cibilInp').value);
+      const badge = document.getElementById('cibilBadge');
+      const sec = document.getElementById('loanGridSection');
+      if (!score || score < 300 || score > 900) { toast('Enter a valid score (300–900)', 'err'); return; }
+      S.cibilScore = score;
+      if (score >= 650) {
+        badge.className = 'badge ok'; badge.textContent = '✓ Eligible';
+        sec.classList.remove('hidden');
+        toast('✅ You are eligible! Choose a loan type below.', 'ok');
+      } else {
+        badge.className = 'badge no'; badge.textContent = '✗ Not Eligible';
+        sec.classList.add('hidden');
+        toast('❌ Score too low. Min 650 required.', 'err');
+      }
+    }
 
-/* ══════════════════════════════════════════
-   LOAN DETAIL PAGE
-══════════════════════════════════════════ */
-let currentLoanIdx = -1;
+    /* ══════════════════════════════════════════
+       LOAN DETAIL PAGE
+    ══════════════════════════════════════════ */
+    let currentLoanIdx = -1;
 
-function openLoanDetail(i){
-  currentLoanIdx = i;
-  const l = LOANS[i];
+    function openLoanDetail(i) {
+      currentLoanIdx = i;
+      const l = LOANS[i];
 
-  // header
-  document.getElementById('ldIcon').textContent = l.icon;
-  document.getElementById('ldName').textContent = l.name;
-  document.getElementById('ldRate').textContent = l.rate;
-  document.getElementById('ldDesc').textContent = l.desc;
+      // header
+      document.getElementById('ldIcon').textContent = l.icon;
+      document.getElementById('ldName').textContent = l.name;
+      document.getElementById('ldRate').textContent = l.rate;
+      document.getElementById('ldDesc').textContent = l.desc;
 
-  // facts
-  document.getElementById('ldFacts').innerHTML = l.facts.map(f=>`
+      // facts
+      document.getElementById('ldFacts').innerHTML = l.facts.map(f => `
     <div class="fact">
       <div class="f-lbl">${f.lbl}</div>
       <div class="f-val">${f.val}</div>
       <div class="f-sub">${f.sub}</div>
     </div>`).join('');
 
-  // tips
-  document.getElementById('ldTips').innerHTML = `
+      // tips
+      document.getElementById('ldTips').innerHTML = `
     <h4>💡 Eligibility Tips</h4>
-    <ul>${l.tips.map(t=>`<li>${t}</li>`).join('')}</ul>`;
+    <ul>${l.tips.map(t => `<li>${t}</li>`).join('')}</ul>`;
 
-  // form fields
-  document.getElementById('formFields').innerHTML = l.fields.map(f=>`
-    <div class="fg2${f.cls?' full':''}">
-      <label>${f.label}${f.req?` <span class="required-mark">*</span>`:''}</label>
-      ${f.type==='select'
-        ? `<select id="ff_${f.id}"><option value="">— Select —</option>${(f.options||[]).map(o=>`<option>${o}</option>`).join('')}</select>`
-        : f.type==='textarea'
-          ? `<textarea id="ff_${f.id}" placeholder="${f.ph||''}"></textarea>`
-          : `<input id="ff_${f.id}" type="${f.type}" placeholder="${f.ph||''}"/>`
-      }
+      // form fields
+      document.getElementById('formFields').innerHTML = l.fields.map(f => `
+    <div class="fg2${f.cls ? ' full' : ''}">
+      <label>${f.label}${f.req ? ` <span class="required-mark">*</span>` : ''}</label>
+      ${f.type === 'select'
+          ? `<select id="ff_${f.id}"><option value="">— Select —</option>${(f.options || []).map(o => `<option>${o}</option>`).join('')}</select>`
+          : f.type === 'textarea'
+            ? `<textarea id="ff_${f.id}" placeholder="${f.ph || ''}"></textarea>`
+            : `<input id="ff_${f.id}" type="${f.type}" placeholder="${f.ph || ''}"/>`
+        }
     </div>`).join('');
 
-  // reset success screen
-  document.getElementById('ldSuccess').classList.add('hidden');
-  document.getElementById('ldForm').classList.remove('hidden');
+      // reset success screen
+      document.getElementById('ldSuccess').classList.add('hidden');
+      document.getElementById('ldForm').classList.remove('hidden');
 
-  navTo('loanDetail', null);
-}
-
-function backToLoans(){
-  navTo('loans', document.querySelector('[data-p="loans"]'));
-}
-
-function submitLoan(){
-  const l = LOANS[currentLoanIdx];
-  // validate required fields
-  for(const f of l.fields){
-    if(f.req){
-      const el = document.getElementById('ff_'+f.id);
-      if(!el || !el.value.trim()){
-        toast(`❌ "${f.label}" is required`,'err');
-        el && el.focus();
-        return;
-      }
+      navTo('loanDetail', null);
     }
-  }
-  const ref = 'NXB' + Date.now().toString().slice(-8);
-  document.getElementById('refNum').textContent = ref;
-  document.getElementById('ldForm').classList.add('hidden');
-  document.getElementById('ldSuccess').classList.remove('hidden');
-  toast('🎉 Application submitted successfully!','ok');
-}
 
-/* ══════════════════════════════════════════
-   MODAL
-══════════════════════════════════════════ */
-function openModal(title, msg, rows, onConfirm){
-  document.getElementById('mTitle').textContent = title;
-  document.getElementById('mMsg').textContent   = msg;
-  document.getElementById('mDetail').innerHTML  = rows.map(r=>`<div class="m-row"><span class="ml">${r.l}</span><span class="mv">${r.v}</span></div>`).join('');
-  document.getElementById('mConfirm').onclick   = ()=>{ onConfirm(); closeModal(); };
-  document.getElementById('modalOverlay').classList.remove('hidden');
-}
-function closeModal(){ document.getElementById('modalOverlay').classList.add('hidden'); }
+    function backToLoans() {
+      navTo('loans', document.querySelector('[data-p="loans"]'));
+    }
 
-/* ══════════════════════════════════════════
-   UTILS
-══════════════════════════════════════════ */
-function v(id){ return document.getElementById(id).value.trim(); }
-function fmt(n){ return '₹' + Number(n).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2}); }
-function now(){ return new Date().toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}); }
+    function submitLoan() {
+      const l = LOANS[currentLoanIdx];
+      // validate required fields
+      for (const f of l.fields) {
+        if (f.req) {
+          const el = document.getElementById('ff_' + f.id);
+          if (!el || !el.value.trim()) {
+            toast(`❌ "${f.label}" is required`, 'err');
+            el && el.focus();
+            return;
+          }
+        }
+      }
+      const ref = 'NXB' + Date.now().toString().slice(-8);
+      document.getElementById('refNum').textContent = ref;
+      document.getElementById('ldForm').classList.add('hidden');
+      document.getElementById('ldSuccess').classList.remove('hidden');
+      toast('🎉 Application submitted successfully!', 'ok');
+    }
 
-function setAlert(id, msg, type){
-  const el = document.getElementById(id);
-  el.className = `alert alert-${type}`;
-  el.textContent = msg;
-}
-function setBtn(id, txt, disabled){
-  const el = document.getElementById(id);
-  el.textContent = txt; el.disabled = disabled;
-}
+    /* ══════════════════════════════════════════
+       MODAL
+    ══════════════════════════════════════════ */
+    function openModal(title, msg, rows, onConfirm) {
+      document.getElementById('mTitle').textContent = title;
+      document.getElementById('mMsg').textContent = msg;
+      document.getElementById('mDetail').innerHTML = rows.map(r => `<div class="m-row"><span class="ml">${r.l}</span><span class="mv">${r.v}</span></div>`).join('');
+      document.getElementById('mConfirm').onclick = () => { onConfirm(); closeModal(); };
+      document.getElementById('modalOverlay').classList.remove('hidden');
+    }
+    function closeModal() { document.getElementById('modalOverlay').classList.add('hidden'); }
 
-function toast(msg, type='inf'){
-  const t = document.createElement('div');
-  t.className = `toast ${type}`;
-  t.textContent = msg;
-  document.getElementById('toasts').appendChild(t);
-  setTimeout(()=>t.remove(), 3200);
-}
+    /* ══════════════════════════════════════════
+       UTILS
+    ══════════════════════════════════════════ */
+    function v(id) { return document.getElementById(id).value.trim(); }
+    function fmt(n) { return '₹' + Number(n).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+    function now() { return new Date().toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }); }
 
-// Close modal on overlay click
-document.getElementById('modalOverlay').addEventListener('click', function(e){
-  if(e.target === this) closeModal();
-});
+    function setAlert(id, msg, type) {
+      const el = document.getElementById(id);
+      el.className = `alert alert-${type}`;
+      el.textContent = msg;
+    }
+    function setBtn(id, txt, disabled) {
+      const el = document.getElementById(id);
+      el.textContent = txt; el.disabled = disabled;
+    }
 
-// Enter key on login
-document.getElementById('lId').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
-document.getElementById('lName').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
-</script>
+    function toast(msg, type = 'inf') {
+      const t = document.createElement('div');
+      t.className = `toast ${type}`;
+      t.textContent = msg;
+      document.getElementById('toasts').appendChild(t);
+      setTimeout(() => t.remove(), 3200);
+    }
+
+    // Close modal on overlay click
+    document.getElementById('modalOverlay').addEventListener('click', function (e) {
+      if (e.target === this) closeModal();
+    });
+
+    // Enter key on login
+    document.getElementById('lId').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+    document.getElementById('lName').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+  </script>
 </body>
+
 </html>
